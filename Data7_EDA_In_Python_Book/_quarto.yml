@@ -7,6 +7,12 @@ book:
   cover-image: cover.png
   chapters:
     - index.qmd
+    - intro.qmd
+    - DiagnosingLikeDataDoctor.qmd
+    - ExploringLikeDataAdventurer.qmd
+    - TransformingLikeDataTrans.qmd
+    - ImputingLikeDataScientist.qmd
+    - CorrelateLikeDataMaster.qmd
 
 
   repo-url: https://github.com/Gchism94/Data7_EDA_In_Python

@@ -269,10 +269,10 @@ data.describe(exclude = [np.number])
 
 ## Produce an HTML Summary of a Data Set
 
-```{python}
+```{python, eval = FALSE}
 # Producing a pandas-profiling report 
 # profile = ProfileReport(data, title = "Pandas Profiling Report")
 
 # HTML output
-# profile.to_widgets()
+profile.to_widgets()
 ```

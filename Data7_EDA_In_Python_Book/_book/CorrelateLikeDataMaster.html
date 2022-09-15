@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data 7 Exploratory Data Analysis In Python Book - Exploratory Data Analysis in Python - Correlate Like a Data Master</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./ImputingLikeDataScientist.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Exploratory Data Analysis in Python - Correlate Like a Data Master</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data 7 Exploratory Data Analysis In Python Book</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/Gchism94/Data7_EDA_In_Python" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">UArizona Data7 Exploratory Data Analysis In Python Book!</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DiagnosingLikeDataDoctor.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Diagnosing like a Data Doctor</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ExploringLikeDataAdventurer.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Exploring like a Data Adventurer</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./TransformingLikeDataTrans.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Transforming like a Data… Transformer</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ImputingLikeDataScientist.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Imputing like a Data Scientist</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CorrelateLikeDataMaster.html" class="sidebar-item-text sidebar-link active">Exploratory Data Analysis in Python - Correlate Like a Data Master</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#purpose-of-workshop" id="toc-purpose-of-workshop" class="nav-link active" data-scroll-target="#purpose-of-workshop">Purpose of workshop</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a>
+  <ul class="collapse">
+  <li><a href="#required-setup" id="toc-required-setup" class="nav-link" data-scroll-target="#required-setup">Required setup</a></li>
+  </ul></li>
+  <li><a href="#load-the-examine-a-data-set" id="toc-load-the-examine-a-data-set" class="nav-link" data-scroll-target="#load-the-examine-a-data-set">Load the Examine a Data Set</a></li>
+  <li><a href="#describe-and-visualize-correlations" id="toc-describe-and-visualize-correlations" class="nav-link" data-scroll-target="#describe-and-visualize-correlations">Describe and Visualize Correlations</a></li>
+  <li><a href="#visualize-correlations-within-groups" id="toc-visualize-correlations-within-groups" class="nav-link" data-scroll-target="#visualize-correlations-within-groups">Visualize Correlations within Groups</a></li>
+  <li><a href="#describe-and-visualize-relationships-based-on-target-variables" id="toc-describe-and-visualize-relationships-based-on-target-variables" class="nav-link" data-scroll-target="#describe-and-visualize-relationships-based-on-target-variables">Describe and Visualize Relationships Based on Target Variables</a>
+  <ul class="collapse">
+  <li><a href="#target-variables" id="toc-target-variables" class="nav-link" data-scroll-target="#target-variables">Target Variables</a></li>
+  <li><a href="#numerical-target-variables-numerical-variable-of-interest" id="toc-numerical-target-variables-numerical-variable-of-interest" class="nav-link" data-scroll-target="#numerical-target-variables-numerical-variable-of-interest">Numerical Target Variables: Numerical Variable of Interest</a></li>
+  <li><a href="#numerical-target-variables-categorical-variable-of-interest" id="toc-numerical-target-variables-categorical-variable-of-interest" class="nav-link" data-scroll-target="#numerical-target-variables-categorical-variable-of-interest">Numerical Target Variables: Categorical Variable of Interest</a></li>
+  <li><a href="#categorical-target-variables-categorical-variable-of-interest" id="toc-categorical-target-variables-categorical-variable-of-interest" class="nav-link" data-scroll-target="#categorical-target-variables-categorical-variable-of-interest">Categorical Target Variables: Categorical Variable of Interest</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Exploratory Data Analysis in Python - Correlate Like a Data Master</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="purpose-of-workshop" class="level2">
+<h2 class="anchored" data-anchor-id="purpose-of-workshop">Purpose of workshop</h2>
+<p><strong>Assess relationships within a novel data set</strong></p>
+<hr>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<ol type="1">
+<li>Describe and visualize correlations between numerical variables</li>
+<li>Visualize correlations of all numerical variables within groups</li>
+<li>Describe and visualize relationships based on target variables</li>
+</ol>
+<hr>
+<section id="required-setup" class="level3">
+<h3 class="anchored" data-anchor-id="required-setup">Required setup</h3>
+<p>We first need to prepare our environment with the necessary libraries and set a global theme for publishable plots in <code>seaborn</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import all required libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Data analysis and manipulation</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Working with arrays</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical visualization</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Matlab plotting for Python</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Data analysis</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statistics <span class="im">as</span> stat</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Two-sample Chi-Square test</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.stats <span class="im">import</span> chi2_contingency</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictive data analysis: process data </span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing <span class="im">as</span> pproc</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictive data analysis: linear models</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> cross_val_predict</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictive data analysis: linear models</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.linear_model <span class="im">import</span> LinearRegression</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizing missing values</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> missingno <span class="im">as</span> msno</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical modeling</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical modeling: ANOVA</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.formula.api <span class="im">import</span> ols</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Mosaic plot</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> statsmodels.graphics.mosaicplot <span class="im">import</span> mosaic</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> itertools <span class="im">import</span> product</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="co"># Increase font and figure size of all seaborn plot elements</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale <span class="op">=</span> <span class="fl">1.5</span>, rc <span class="op">=</span> {<span class="st">'figure.figsize'</span>:(<span class="dv">8</span>, <span class="dv">8</span>)})</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Change theme to "white"</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+</section>
+<section id="load-the-examine-a-data-set" class="level2">
+<h2 class="anchored" data-anchor-id="load-the-examine-a-data-set">Load the Examine a Data Set</h2>
+<p>We will be using open source data from UArizona researchers that investigates the effects of climate change on canopy trees. <span class="citation" data-cites="meredith2021">(<a href="#ref-meredith2021" role="doc-biblioref">Meredith, Ladd, and Werner 2021</a>)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read csv </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"data/Data_Fig2_Repo.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># What does the data look like</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Date                Group    Sap_Flow  TWaterFlux      pLWP      mLWP
+0  10/4/19  Drought-sens-canopy  184.040975   82.243292 -0.263378 -0.679769
+1  10/4/19   Drought-sens-under    2.475989    1.258050 -0.299669 -0.761326
+2  10/4/19   Drought-tol-canopy   10.598949    4.405479 -0.437556 -0.722557
+3  10/4/19    Drought-tol-under    4.399854    2.055276 -0.205224 -0.702858
+4  10/5/19  Drought-sens-canopy  182.905444   95.865255 -0.276928 -0.708261</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="describe-and-visualize-correlations" class="level2">
+<h2 class="anchored" data-anchor-id="describe-and-visualize-correlations">Describe and Visualize Correlations</h2>
+<p><a href="https://en.wikipedia.org/wiki/Correlation">Correlations</a> are a statistical relationship between two numerical variables, may or may not be causal. Exploring correlations in your data allows you determine data independence, a major <a href="https://www.statology.org/parametric-tests-assumptions/">assumption of parametric statistics</a>, which means your variables are both randomly collected.</p>
+<section id="if-youre-interested-in-some-underlying-statistics" class="level4">
+<h4 class="anchored" data-anchor-id="if-youre-interested-in-some-underlying-statistics">If you’re interested in some underlying statistics…</h4>
+<p>Note that the we will use the <a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficienthttps://en.wikipedia.org/wiki/Pearson_correlation_coefficient">Pearson’s <span class="math inline">\(r\)</span> coefficient</a> in <code>corr()</code> function from the <code>pandas</code> library, but you can specify any method you would like: <code>corr(method = "")</code>, where the method can be <code>"pearson"</code> for Pearson’s <span class="math inline">\(r\)</span>, <code>"spearman"</code> for <a href="https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient">Spearman’s</a> <span class="math inline">\(\rho\)</span>, or <code>"kendall"</code> for <a href="https://en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient">Kendall’s</a> <span class="math inline">\(\tau\)</span>. The main differences are that Pearson’s <span class="math inline">\(r\)</span> assumes a normal distribution for ALL numerical variables, whereas Spearman’s <span class="math inline">\(\rho\)</span> and Kendall’s <span class="math inline">\(\tau\)</span> do not, but Spearman’s <span class="math inline">\(\rho\)</span> requires <span class="math inline">\(N &gt; 10\)</span>, and Kendall’s <span class="math inline">\(\tau\)</span> does not. Notably, Kendall’s <span class="math inline">\(\tau\)</span> performs as well as Spearman’s <span class="math inline">\(\rho\)</span> when <span class="math inline">\(N &gt; 10\)</span>, so its best to just use Kendall’s <span class="math inline">\(\tau\)</span> when data are not normally distributed.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Table of correlations between numerical variables (we are sticking to the default Pearson's r coefficient)</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>data.corr()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Sap_Flow  TWaterFlux      pLWP      mLWP
+Sap_Flow    1.000000    0.988137  0.120281 -0.201195
+TWaterFlux  0.988137    1.000000  0.125645 -0.189330
+pLWP        0.120281    0.125645  1.000000  0.677651
+mLWP       -0.201195   -0.189330  0.677651  1.000000</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmap correlation matrix of numerical variables</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation matrix</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>corr <span class="op">=</span> data.corr()</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a mask for the upper triangle</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.triu(np.ones_like(corr, dtype <span class="op">=</span> <span class="bu">bool</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a custom diverging colormap</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>cmap <span class="op">=</span> sns.diverging_palette(<span class="dv">230</span>, <span class="dv">20</span>, as_cmap <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmap of the correlation matrix</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>sns.heatmap(corr, cmap <span class="op">=</span> cmap, mask <span class="op">=</span> mask, vmax <span class="op">=</span> <span class="fl">0.3</span>, center <span class="op">=</span> <span class="dv">0</span>,</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>            square <span class="op">=</span> <span class="va">True</span>, linewidths <span class="op">=</span> <span class="fl">0.5</span>, cbar_kws <span class="op">=</span> {<span class="st">"shrink"</span>: <span class="fl">.5</span>})</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Tight margins for plot</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="CorrelateLikeDataMaster_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="visualize-correlations-within-groups" class="level2">
+<h2 class="anchored" data-anchor-id="visualize-correlations-within-groups">Visualize Correlations within Groups</h2>
+<p>If we have groups that we will compare later on, it is a good idea to see how each numerical variable correlates within these groups.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Increase font and figure size of all seaborn plot elements</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale <span class="op">=</span> <span class="fl">1.5</span>, rc <span class="op">=</span> {<span class="st">'figure.figsize'</span>:(<span class="dv">10</span>, <span class="dv">10</span>)})</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Change theme to "white"</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"white"</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmap correlation matrix of numerical variables</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Correlation matrix</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>corr <span class="op">=</span> data.groupby(<span class="st">'Group'</span>).corr()</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a mask for the upper triangle</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>mask <span class="op">=</span> np.triu(np.ones_like(corr, dtype <span class="op">=</span> <span class="bu">bool</span>))</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate a custom diverging colormap</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>cmap <span class="op">=</span> sns.diverging_palette(<span class="dv">230</span>, <span class="dv">20</span>, as_cmap <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Heatmap of the correlation matrix</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>ax <span class="op">=</span> sns.heatmap(corr, cmap <span class="op">=</span> cmap, mask <span class="op">=</span> mask, vmax <span class="op">=</span> <span class="fl">0.3</span>, center <span class="op">=</span> <span class="dv">0</span>,</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>            square <span class="op">=</span> <span class="va">True</span>, linewidths <span class="op">=</span> <span class="fl">0.5</span>, cbar_kws <span class="op">=</span> {<span class="st">"shrink"</span>: <span class="fl">.5</span>})</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Change y-axis label</span></span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(ylabel <span class="op">=</span> <span class="st">'Group'</span>)</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Tight margins for plot</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="CorrelateLikeDataMaster_files/figure-html/unnamed-chunk-5-3.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+<p>This is great, we have our correlations within groups! However, the correlation matrices aren’t always the most intuitive, so let’s plot!</p>
+<p>Specifically, we are looking at the correlations between predawn leaf water potential <code>pLWP</code> and midday leaf water potential <code>mLWP</code>. Leaf water potential is a key indicator for how stressed plants are in droughts.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>dataplot <span class="op">=</span> data[[<span class="st">"Group"</span>, <span class="st">"pLWP"</span>, <span class="st">"mLWP"</span>]]</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Increase font and figure size of all seaborn plot elements</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale <span class="op">=</span> <span class="fl">2.5</span>, rc <span class="op">=</span> {<span class="st">'figure.figsize'</span>:(<span class="dv">10</span>, <span class="dv">10</span>)})</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Change seaborn plot theme to white</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"white"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Empty subplot grid for pairwise relationships</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>g <span class="op">=</span> sns.PairGrid(dataplot, hue <span class="op">=</span> <span class="st">"Group"</span>, height <span class="op">=</span> <span class="dv">5</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Add scatterplots to the upper portion of the grid</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>g1 <span class="op">=</span> g.map_upper(sns.scatterplot, alpha <span class="op">=</span> <span class="fl">0.5</span>, s <span class="op">=</span> <span class="dv">100</span>)</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a kernal density plot to the diagonal of the grid</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>g2 <span class="op">=</span> g1.map_diag(sns.kdeplot, fill <span class="op">=</span> <span class="va">True</span>, linewidth <span class="op">=</span> <span class="dv">3</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Add a kernal density plot to the lower portion of the grid</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>g3 <span class="op">=</span> g2.map_lower(sns.kdeplot, levels <span class="op">=</span> <span class="dv">5</span>, alpha <span class="op">=</span> <span class="fl">0.75</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove legend title</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>g4 <span class="op">=</span> g3.add_legend(title <span class="op">=</span> <span class="st">""</span>, adjust_subtitles <span class="op">=</span> <span class="va">True</span>)</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="CorrelateLikeDataMaster_files/figure-html/unnamed-chunk-6-5.png" class="img-fluid" width="1442"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="describe-and-visualize-relationships-based-on-target-variables" class="level2">
+<h2 class="anchored" data-anchor-id="describe-and-visualize-relationships-based-on-target-variables">Describe and Visualize Relationships Based on Target Variables</h2>
+<hr>
+<section id="target-variables" class="level3">
+<h3 class="anchored" data-anchor-id="target-variables">Target Variables</h3>
+<p><code>Target variables</code> are essentially numerical or categorical variables that you want to relate others to in a data frame.</p>
+<p>The relationships below will have the formula relationship <code>target ~ predictor</code>.</p>
+<hr>
+</section>
+<section id="numerical-target-variables-numerical-variable-of-interest" class="level3">
+<h3 class="anchored" data-anchor-id="numerical-target-variables-numerical-variable-of-interest">Numerical Target Variables: Numerical Variable of Interest</h3>
+<p><code>Formula: pLWP (numerical)  ~ Sap_Flow (numerical)</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># The numerical predictor variable </span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>X <span class="op">=</span> data[[<span class="st">"Sap_Flow"</span>]]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="co"># The numerical target variable</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>Y <span class="op">=</span> data[[<span class="st">"pLWP"</span>]]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the linear model, drop NAs</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> sm.OLS(Y, X, missing <span class="op">=</span> <span class="st">'drop'</span>)</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>model_result <span class="op">=</span> model.fit()</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary of the linear model</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>model_result.summary()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+
+<table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tbody><tr>
+  <th>Dep. Variable:</th>          <td>pLWP</td>       <th>  R-squared (uncentered):</th>      <td>   0.192</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared (uncentered):</th> <td>   0.189</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th>          <td>   65.19</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Thu, 15 Sep 2022</td> <th>  Prob (F-statistic):</th>          <td>2.14e-14</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>12:05:54</td>     <th>  Log-Likelihood:    </th>          <td> -243.33</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   276</td>      <th>  AIC:               </th>          <td>   488.7</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   275</td>      <th>  BIC:               </th>          <td>   492.3</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>              <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>              <td> </td>   
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+      <td></td>        <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P&gt;|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Sap_Flow</th> <td>   -0.0053</td> <td>    0.001</td> <td>   -8.074</td> <td> 0.000</td> <td>   -0.007</td> <td>   -0.004</td>
+</tr>
+</tbody></table>
+<table class="simpletable">
+<tbody><tr>
+  <th>Omnibus:</th>       <td>57.407</td> <th>  Durbin-Watson:     </th> <td>   0.495</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td> 134.440</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.991</td> <th>  Prob(JB):          </th> <td>6.41e-30</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 5.787</td> <th>  Cond. No.          </th> <td>    1.00</td>
+</tr>
+</tbody></table><br><br>Notes:<br>[1] R² is computed without centering (uncentered) since the model does not contain a constant.<br>[2] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotting the linear relationship</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Increase font and figure size of all seaborn plot elements</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale <span class="op">=</span> <span class="fl">1.25</span>, rc <span class="op">=</span> {<span class="st">'figure.figsize'</span>:(<span class="dv">8</span>, <span class="dv">8</span>)})</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Change seaborn plot theme to white</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"white"</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Drop NAs from observed Sap_Flow values</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>X_Obsv <span class="op">=</span> X.dropna()</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Predicted values</span></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>ObsvVal <span class="op">=</span> X_Obsv.Sap_Flow</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>X_max <span class="op">=</span> ObsvVal.<span class="bu">max</span>() <span class="co"># X max</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>X_min <span class="op">=</span> ObsvVal.<span class="bu">min</span>() <span class="co"># X min</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="co"># New dataframe from predicted values</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>X_Pred <span class="op">=</span> pd.DataFrame(model_result.fittedvalues)</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Name the column for predicted values</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>X_Pred.columns <span class="op">=</span> [<span class="st">"Pred"</span>]</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Add the predicted values to the Y value dataframe</span></span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>X_Comp <span class="op">=</span> pd.concat([X_Obsv, X_Pred], axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Subplots</span></span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(ncols <span class="op">=</span> <span class="dv">2</span>, nrows <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Regression plot between Sap_Flow and pLWP</span></span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a>sns.regplot(data <span class="op">=</span> data, x <span class="op">=</span> <span class="st">"Sap_Flow"</span>, y <span class="op">=</span> <span class="st">"pLWP"</span>, ax <span class="op">=</span> ax1)</span>
+<span id="cb10-32"><a href="#cb10-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-33"><a href="#cb10-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Set regression plot title</span></span>
+<span id="cb10-34"><a href="#cb10-34" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">"Linear regression"</span>)</span>
+<span id="cb10-35"><a href="#cb10-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-36"><a href="#cb10-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Scatterplot with linear predicted vs observed pLWP values</span></span>
+<span id="cb10-37"><a href="#cb10-37" aria-hidden="true" tabindex="-1"></a>pred_plot <span class="op">=</span> sns.scatterplot(x <span class="op">=</span> X_Comp.Pred, y <span class="op">=</span> X_Comp.Sap_Flow, alpha <span class="op">=</span> <span class="fl">0.5</span>, s <span class="op">=</span> <span class="dv">50</span>, ax <span class="op">=</span> ax2)</span>
+<span id="cb10-38"><a href="#cb10-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-39"><a href="#cb10-39" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the length for a line segment</span></span>
+<span id="cb10-40"><a href="#cb10-40" aria-hidden="true" tabindex="-1"></a>X_ref <span class="op">=</span> Y_ref <span class="op">=</span> np.linspace(X_min, X_max, <span class="dv">100</span>)</span>
+<span id="cb10-41"><a href="#cb10-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-42"><a href="#cb10-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Linesegment representing a slope of 1</span></span>
+<span id="cb10-43"><a href="#cb10-43" aria-hidden="true" tabindex="-1"></a>pred_plot.plot(X_ref, X_ref, color <span class="op">=</span> <span class="st">'red'</span>, linewidth <span class="op">=</span> <span class="dv">2</span>)</span>
+<span id="cb10-44"><a href="#cb10-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-45"><a href="#cb10-45" aria-hidden="true" tabindex="-1"></a><span class="co"># Set pred vs. obsv plot title</span></span>
+<span id="cb10-46"><a href="#cb10-46" aria-hidden="true" tabindex="-1"></a>pred_plot.set_title(<span class="st">"Predicted vs. observed"</span>)</span>
+<span id="cb10-47"><a href="#cb10-47" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-48"><a href="#cb10-48" aria-hidden="true" tabindex="-1"></a><span class="co"># Set x and y axes titles and limits</span></span>
+<span id="cb10-49"><a href="#cb10-49" aria-hidden="true" tabindex="-1"></a>pred_plot.<span class="bu">set</span>(xlabel <span class="op">=</span> <span class="st">"Predicted value of Sap_Flow"</span>, ylabel <span class="op">=</span> <span class="st">"Observed value of Sap_Flow"</span>,</span>
+<span id="cb10-50"><a href="#cb10-50" aria-hidden="true" tabindex="-1"></a>xlim <span class="op">=</span> (X_min, X_max), ylim <span class="op">=</span> (X_min, X_max))</span>
+<span id="cb10-51"><a href="#cb10-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-52"><a href="#cb10-52" aria-hidden="true" tabindex="-1"></a><span class="co"># Tight margins</span></span>
+<span id="cb10-53"><a href="#cb10-53" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb10-54"><a href="#cb10-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-55"><a href="#cb10-55" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb10-56"><a href="#cb10-56" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="CorrelateLikeDataMaster_files/figure-html/unnamed-chunk-8-7.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+<hr>
+</section>
+<section id="numerical-target-variables-categorical-variable-of-interest" class="level3">
+<h3 class="anchored" data-anchor-id="numerical-target-variables-categorical-variable-of-interest">Numerical Target Variables: Categorical Variable of Interest</h3>
+<p>Formula: <code>Group (categorical) ~ pLWP (numerical)</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>model <span class="op">=</span> ols(<span class="st">'pLWP ~ C(Group)'</span>, data <span class="op">=</span> data).fit()</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>sm.stats.anova_lm(model, typ <span class="op">=</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>             sum_sq     df          F        PR(&gt;F)
+C(Group)   2.775293    3.0  22.045408  8.267447e-13
+Residual  11.414011  272.0        NaN           NaN</code></pre>
+</div>
+</div>
+<div class="cell" data-layout-align="right">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Increase font and figure size of all seaborn plot elements</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale <span class="op">=</span> <span class="fl">1.25</span>, rc <span class="op">=</span> {<span class="st">'figure.figsize'</span>:(<span class="dv">4</span>, <span class="dv">4</span>)})</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Change seaborn plot theme to white</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"white"</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Box plot</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>Group_Box <span class="op">=</span> sns.boxplot(data <span class="op">=</span> data, x <span class="op">=</span> <span class="st">"pLWP"</span>, y <span class="op">=</span> <span class="st">"Group"</span>, width <span class="op">=</span> <span class="fl">0.3</span>)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Tweak the visual presentation</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>Group_Box.<span class="bu">set</span>(ylabel <span class="op">=</span> <span class="st">"Group"</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Tight margins</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-right">
+<figure class="figure">
+<p><img src="CorrelateLikeDataMaster_files/figure-html/unnamed-chunk-10-9.png" class="img-fluid figure-img" width="768"></p>
+</figure>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grouped describe by one column, stacked </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>Groups <span class="op">=</span> data.groupby(<span class="st">'Group'</span>).describe().unstack(<span class="dv">1</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print all rows</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Groups.to_string())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   Group              
+Sap_Flow    count  Drought-sens-canopy    120.000000
+                   Drought-sens-under     120.000000
+                   Drought-tol-canopy     120.000000
+                   Drought-tol-under      120.000000
+            mean   Drought-sens-canopy     85.269653
+                   Drought-sens-under       1.448825
+                   Drought-tol-canopy       9.074309
+                   Drought-tol-under        4.573516
+            std    Drought-sens-canopy     41.313962
+                   Drought-sens-under       0.803858
+                   Drought-tol-canopy       1.395670
+                   Drought-tol-under        0.902430
+            min    Drought-sens-canopy     33.370450
+                   Drought-sens-under       0.172630
+                   Drought-tol-canopy       5.904610
+                   Drought-tol-under        2.171780
+            25%    Drought-sens-canopy     53.975162
+                   Drought-sens-under       0.534165
+                   Drought-tol-canopy       8.119410
+                   Drought-tol-under        4.053346
+            50%    Drought-sens-canopy     76.717782
+                   Drought-sens-under       1.665492
+                   Drought-tol-canopy       9.286552
+                   Drought-tol-under        4.944842
+            75%    Drought-sens-canopy     94.068107
+                   Drought-sens-under       2.194299
+                   Drought-tol-canopy      10.404117
+                   Drought-tol-under        5.139685
+            max    Drought-sens-canopy    184.040975
+                   Drought-sens-under       2.475989
+                   Drought-tol-canopy      10.705455
+                   Drought-tol-under        5.726712
+TWaterFlux  count  Drought-sens-canopy    147.000000
+                   Drought-sens-under     147.000000
+                   Drought-tol-canopy     147.000000
+                   Drought-tol-under      147.000000
+            mean   Drought-sens-canopy     40.404061
+                   Drought-sens-under       0.751770
+                   Drought-tol-canopy       4.357234
+                   Drought-tol-under        2.189824
+            std    Drought-sens-canopy     19.027997
+                   Drought-sens-under       0.429073
+                   Drought-tol-canopy       0.940353
+                   Drought-tol-under        0.597511
+            min    Drought-sens-canopy     12.377738
+                   Drought-sens-under       0.101381
+                   Drought-tol-canopy       2.036843
+                   Drought-tol-under        0.953906
+            25%    Drought-sens-canopy     25.220908
+                   Drought-sens-under       0.274190
+                   Drought-tol-canopy       3.601341
+                   Drought-tol-under        1.735003
+            50%    Drought-sens-canopy     38.630891
+                   Drought-sens-under       0.824875
+                   Drought-tol-canopy       4.460778
+                   Drought-tol-under        2.198131
+            75%    Drought-sens-canopy     50.096197
+                   Drought-sens-under       1.112890
+                   Drought-tol-canopy       5.112844
+                   Drought-tol-under        2.686605
+            max    Drought-sens-canopy     96.012719
+                   Drought-sens-under       1.801823
+                   Drought-tol-canopy       5.976890
+                   Drought-tol-under        3.654336
+pLWP        count  Drought-sens-canopy     69.000000
+                   Drought-sens-under      69.000000
+                   Drought-tol-canopy      69.000000
+                   Drought-tol-under       69.000000
+            mean   Drought-sens-canopy     -0.669932
+                   Drought-sens-under      -0.696138
+                   Drought-tol-canopy      -0.629909
+                   Drought-tol-under       -0.440243
+            std    Drought-sens-canopy      0.246390
+                   Drought-sens-under       0.283935
+                   Drought-tol-canopy       0.095571
+                   Drought-tol-under        0.131879
+            min    Drought-sens-canopy     -1.299263
+                   Drought-sens-under      -1.433333
+                   Drought-tol-canopy      -0.863656
+                   Drought-tol-under       -0.746667
+            25%    Drought-sens-canopy     -0.790573
+                   Drought-sens-under      -0.800000
+                   Drought-tol-canopy      -0.706479
+                   Drought-tol-under       -0.520487
+            50%    Drought-sens-canopy     -0.705942
+                   Drought-sens-under      -0.592118
+                   Drought-tol-canopy      -0.602841
+                   Drought-tol-under       -0.406439
+            75%    Drought-sens-canopy     -0.473290
+                   Drought-sens-under      -0.521217
+                   Drought-tol-canopy      -0.571356
+                   Drought-tol-under       -0.360789
+            max    Drought-sens-canopy     -0.263378
+                   Drought-sens-under      -0.299669
+                   Drought-tol-canopy      -0.437556
+                   Drought-tol-under       -0.205224
+mLWP        count  Drought-sens-canopy     77.000000
+                   Drought-sens-under      77.000000
+                   Drought-tol-canopy      77.000000
+                   Drought-tol-under       77.000000
+            mean   Drought-sens-canopy     -1.319148
+                   Drought-sens-under      -1.097537
+                   Drought-tol-canopy      -0.892554
+                   Drought-tol-under       -0.809572
+            std    Drought-sens-canopy      0.298107
+                   Drought-sens-under       0.263522
+                   Drought-tol-canopy       0.091729
+                   Drought-tol-under        0.170603
+            min    Drought-sens-canopy     -1.812151
+                   Drought-sens-under      -1.808333
+                   Drought-tol-canopy      -1.073619
+                   Drought-tol-under       -1.168716
+            25%    Drought-sens-canopy     -1.525563
+                   Drought-sens-under      -1.335521
+                   Drought-tol-canopy      -0.945841
+                   Drought-tol-under       -0.907041
+            50%    Drought-sens-canopy     -1.354771
+                   Drought-sens-under      -1.054159
+                   Drought-tol-canopy      -0.890061
+                   Drought-tol-under       -0.735647
+            75%    Drought-sens-canopy     -1.111942
+                   Drought-sens-under      -0.907564
+                   Drought-tol-canopy      -0.828777
+                   Drought-tol-under       -0.699087
+            max    Drought-sens-canopy     -0.679769
+                   Drought-sens-under      -0.546152
+                   Drought-tol-canopy      -0.707789
+                   Drought-tol-under       -0.545165</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="categorical-target-variables-categorical-variable-of-interest" class="level3">
+<h3 class="anchored" data-anchor-id="categorical-target-variables-categorical-variable-of-interest">Categorical Target Variables: Categorical Variable of Interest</h3>
+<p>Notably, there is only one categorical variable… Let’s make another:</p>
+<p>If <span class="math inline">\(mLWP &gt; mean(mLWP) + sd(mLWP)\)</span> then “Yes”, else “No”.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>data1 <span class="op">=</span> data.dropna()</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>Qual <span class="op">=</span> stat.mean(data1.pLWP <span class="op">+</span> stat.stdev(data1.pLWP))</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Create HighLWP from the age column</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> HighLWP_data(data): </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> data.pLWP <span class="op">&gt;=</span> Qual: <span class="cf">return</span> <span class="st">"Yes"</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>: <span class="cf">return</span> <span class="st">"No"</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Apply the function to data and create a dataframe</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>HighLWP <span class="op">=</span> pd.DataFrame(data1.<span class="bu">apply</span>(HighLWP_data, axis <span class="op">=</span> <span class="dv">1</span>))</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Name new column</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>HighLWP.columns <span class="op">=</span> [<span class="st">'HighLWP'</span>]</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Concatenate the two dataframes</span></span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>data1 <span class="op">=</span> pd.concat([data1, HighLWP], axis <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a><span class="co"># First six rows of new dataset</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>data1.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Date                Group    Sap_Flow  ...      pLWP      mLWP  HighLWP
+0  10/4/19  Drought-sens-canopy  184.040975  ... -0.263378 -0.679769      Yes
+1  10/4/19   Drought-sens-under    2.475989  ... -0.299669 -0.761326      Yes
+2  10/4/19   Drought-tol-canopy   10.598949  ... -0.437556 -0.722557       No
+3  10/4/19    Drought-tol-under    4.399854  ... -0.205224 -0.702858      Yes
+4  10/5/19  Drought-sens-canopy  182.905444  ... -0.276928 -0.708261      Yes
+
+[5 rows x 7 columns]</code></pre>
+</div>
+</div>
+<p>Now we have two categories!</p>
+<p>Formula = <code>Group (categorical) ~ HighLWP (categorical)</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>obs <span class="op">=</span> pd.crosstab(data1.Group, data1.HighLWP)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(obs)</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Chi-square test</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>HighLWP              No  Yes
+Group                       
+Drought-sens-canopy  58   11
+Drought-sens-under   65    4
+Drought-tol-canopy   69    0
+Drought-tol-under    49   20</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>chi2, p, dof, ex <span class="op">=</span> chi2_contingency(obs, correction <span class="op">=</span> <span class="va">False</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpret</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Print the interpretation</span></span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Statistic = </span><span class="sc">%.3f</span><span class="st">, p = </span><span class="sc">%.3f</span><span class="st">'</span> <span class="op">%</span> (chi2, p))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Statistic = 30.201, p = 0.000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> p <span class="op">&gt;</span> alpha:</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">'Chi-square value is not greater than critical value (fail to reject H0)'</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'Chi-square value is greater than critical value (reject H0)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Chi-square value is greater than critical value (reject H0)</code></pre>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-meredith2021" class="csl-entry" role="doc-biblioentry">
+Meredith, Laura, S. Nemiah Ladd, and Christiane Werner. 2021. <span>“Data for <span>"</span>Ecosystem Fluxes During Drought and Recovery in an Experimental Forest<span>"</span>.”</span> University of Arizona Research Data Repository. <a href="https://doi.org/10.25422/AZU.DATA.14632593.V1">https://doi.org/10.25422/AZU.DATA.14632593.V1</a>.
+</div>
+</div>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./ImputingLikeDataScientist.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exploratory Data Analysis in Python - Imputing like a Data Scientist</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

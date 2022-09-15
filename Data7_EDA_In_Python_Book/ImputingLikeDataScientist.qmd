@@ -505,14 +505,21 @@ data1 = data1.dropna()
 # Set the two target x variables and the binary y variable we are clustering the data from
 data1 = data1.rename(columns = {'Insulin': 'x1', 'Glucose': 'x2', 'Outcome': 'y'})
 
+# Create KNN plot for 3 nearest neighbors
+knn_comparision(data1, 3)
+```
+
+You can also loop the KNN plots for i nearest neighbors:
+
+```{python, eval = FALSE}
 # Loop to create KNN plots for i number of nearest neighbors
 for i in [1, 5, 15]:
-    knn_comparision(data1, i)
+  knn_comparision(data1, i)
 ```
 
 **Note, we have to change a three things to make `KNNImputer` work correctly**:
 
-1.  We need to change any characters, into dummy variables that are numerics, because scalers and imputaters do not recognize characters. In this case, `Age_group` is an ordinal category, so we will use `OrdinalEncoder` from `Scikit-learn`, specifically in `preprocessing` which we imported as `pproc`.
+1.  We need to change any characters, into dummy variables that are numericals, because scalars and imputers do not recognize characters. In this case, `Age_group` is an ordinal category, so we will use `OrdinalEncoder` from `Scikit-learn`, specifically in `preprocessing` which we imported as `pproc`.
 
 ```{python}
 # Numeric dummy variable from our Age_group ordinal column
