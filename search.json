@@ -5,5 +5,33 @@
     "title": "Data 7 Exploratory Data Analysis In Python Book",
     "section": "",
     "text": "Here you will find a collection of workshops prepared by the staff of the Data Science Institute\n\n\n\n\n\nExploring a novel data set and produce an HTML interactive reports\n\n\n\n\n\n\n\nExploring the normality of numerical columns in a novel data set\n\n\n\n\n\n\n\nUsing data transformation to correct non-normality in numerical data\n\n\n\n\n\n\n\nExploring, visualizing, and imputing outliers and missing values (NAs) in a novel data set\n\n\n\n\n\n\n\nAssess relationships within a novel data set\n\nVisit our available Digital Learning Resources Library!\n\nCreated: 09/14/2022 (G. Chism); Last update: 09/14/2022\n CC BY-NC-SA"
+  },
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "Exploratory data analysis is an essential first step towards determining the validity of your data and should be performed throughout the data pipeline. However, EDA is often performed too late or not at all. The Python programming language, is a widely used open source platform for data analysis and data visualization. This is because of the variety of libraries available and attentive community devoted to data analysis.\nHere, we utilize the pandas and pandas-profiling libraries to conduct preliminary exploratory data analysis aimed at diagnosing any major issues with an imported data set. pandas and pandas-profiling offers a clean and straightforward methodology to uncover issues such as data outliers, missing data, as well as summary statistical reports."
+  },
+  {
+    "objectID": "intro.html#what-are-some-important-data-set-characteristics",
+    "href": "intro.html#what-are-some-important-data-set-characteristics",
+    "title": "Introduction",
+    "section": "What are Some Important Data Set Characteristics?",
+    "text": "What are Some Important Data Set Characteristics?\nThere are several characteristics that are arguably important, but we will only consider those covered in this workshop series. Let’s start with the fundamentals that will help guide us."
+  },
+  {
+    "objectID": "intro.html#diagnostics",
+    "href": "intro.html#diagnostics",
+    "title": "Introduction",
+    "section": "Diagnostics",
+    "text": "Diagnostics\nWhen importing data sets, it is important to consider characteristics about the data columns, rows, and individual cells.\n\n\nVariables\nName of each variable\n\n\n   Pregnancies  Glucose  BloodPressure  ...  Age  Outcome  Age_group\n0            6      148             72  ...   50        1     Middle\n1            1       85             66  ...   31        0     Middle\n2            8      183             64  ...   32        1     Middle\n3            1       89             66  ...   21        0      Young\n4            0      137             40  ...   33        1     Middle\n\n[5 rows x 10 columns]\n\n\n\n\nTypes\nData type of each variable\n\n\nPregnancies                   int64\nGlucose                       int64\nBloodPressure                 int64\nSkinThickness                 int64\nInsulin                       int64\nBMI                         float64\nDiabetesPedigreeFunction    float64\nAge                           int64\nOutcome                       int64\nAge_group                    object\ndtype: object\n\n\n\nNumerical: Continuous\nMeasurable numbers that are fractional or decimal and cannot be counted (e.g., time, height, weight)\n\n\n\n\n\n\n\nNumerical: Discrete\nCountable whole numbers or integers (e.g., number of successes or failures)\n\n\n\n\n\n\n\n\nCategorical: Nominal\nLabeling variables without any order or quantitative value (e.g., hair color, nationality)\n\n\n\n\n\n\n\nCategorical: Ordinal\nWhere there is a hierarchical order along a scale (e.g., ranks, letter grades, age groups)\n\n\n\n\n\n\n\n\nMissing Values (NAs)\nCells, rows, or columns without data\n\nMissing percent: percentage of missing values * Unique count: number of unique values.\nUnique rate: rate of unique value - unique count / total number of observations.\n\n\n\n   Pregnancies  Glucose  BloodPressure  ...  Outcome  Age_group  Outcome1\n0          6.0    148.0           72.0  ...      1.0     Middle       Yes\n1          1.0     85.0           66.0  ...      NaN     Middle        No\n2          8.0    183.0           64.0  ...      1.0     Middle       Yes\n3          1.0     89.0           66.0  ...      0.0      Young        No\n4          0.0    137.0           40.0  ...      1.0     Middle       Yes\n\n[5 rows x 11 columns]"
+  },
+  {
+    "objectID": "intro.html#summary-statistics",
+    "href": "intro.html#summary-statistics",
+    "title": "Introduction",
+    "section": "Summary Statistics",
+    "text": "Summary Statistics\nAbove we described some properties of data. However, you will need to know some descriptive characteristics of your data before you can move forward. Enter, summary statistics.\nSummary statistics allow you to summarize large amounts of information about your data as quickly as possible.\n\nCentral Tendency\nMeasuring a central property of your data. Some examples you’ve probably heard of are:\n\nMean: Average value\nMedian: Middle value\nMode: Most common value\n\n\n\n\n\n\nNotice that all values of central tendency can be pretty similar in this figure.\n\n\n\n\n\nHowever, in this figure, all measures are different. This will be important when we discuss statistical dispersion in chapter 3.\n\n\n\n\n\nStatistical Dispersion\nMeasure of data variability, scatter, or spread. Some examples you may have heard of:\n\nStandard deviation (SD): The amount of variation that occurs in a set of values.\nInterquartile range (IQR): The difference between the 75th and 25th percentiles\nOutliers: A value outside of \\(1.5 * IQR\\)\n\n\n\n\n\n\n\n\nDistribution Shape\nMeasures of describing the shape of a distribution, usually compared to a normal distribution (bell-curve)\n\nSkewness: The symmetry of the distribution\nKurtosis: The tailedness of the distribution\n\n\n\n\n\n\n\n\nStatistical Dependence (Correlation)\nMeasure of causality between two random variables (statistically). Notably, we approximate causality with correlations (see correlation \\(\\neq\\) causation)\n\nNumerical values, but you can compare numericals across categories (see the first plot above)."
   }
 ]
