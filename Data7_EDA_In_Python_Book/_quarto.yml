@@ -1,0 +1,22 @@
+project:
+  type: book
+
+book:
+  title: "Data 7 Exploratory Data Analysis In Python Book"
+  author: "Greg Chism"
+  cover-image: cover.png
+  chapters:
+    - index.qmd
+
+
+  repo-url: https://github.com/Gchism94/Data7_EDA_In_Python
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: cosmo
+    code-copy: true
+
+
+
