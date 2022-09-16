@@ -207,7 +207,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#diagnose-outliers" id="toc-diagnose-outliers" class="nav-link" data-scroll-target="#diagnose-outliers">Diagnose Outliers</a></li>
   <li><a href="#basic-exploration-of-missing-values-nas" id="toc-basic-exploration-of-missing-values-nas" class="nav-link" data-scroll-target="#basic-exploration-of-missing-values-nas">Basic Exploration of Missing Values (NAs)</a></li>
   <li><a href="#advanced-exploration-of-missing-values-nas" id="toc-advanced-exploration-of-missing-values-nas" class="nav-link" data-scroll-target="#advanced-exploration-of-missing-values-nas">Advanced Exploration of Missing Values (NAs)</a></li>
-  <li><a href="#impute-outliers-and-nas" id="toc-impute-outliers-and-nas" class="nav-link" data-scroll-target="#impute-outliers-and-nas">Impute Outliers and NAs</a>
+  <li><a href="#impute-outliers" id="toc-impute-outliers" class="nav-link" data-scroll-target="#impute-outliers">Impute Outliers</a>
   <ul class="collapse">
   <li><a href="#classifying-outliers" id="toc-classifying-outliers" class="nav-link" data-scroll-target="#classifying-outliers">Classifying Outliers</a></li>
   <li><a href="#mean-imputation" id="toc-mean-imputation" class="nav-link" data-scroll-target="#mean-imputation">Mean Imputation</a></li>
@@ -511,8 +511,8 @@ dtype: int64</code></pre>
 </div>
 <hr>
 </section>
-<section id="impute-outliers-and-nas" class="level2">
-<h2 class="anchored" data-anchor-id="impute-outliers-and-nas">Impute Outliers and NAs</h2>
+<section id="impute-outliers" class="level2">
+<h2 class="anchored" data-anchor-id="impute-outliers">Impute Outliers</h2>
 <p>Removing outliers and NAs can be tricky, but there are methods to do so. I will go over several, and discuss benefits and costs to each.</p>
 <p>The principle goal for all imputation is to find the method that does not change the distribution too much (or oddly).</p>
 <hr>
@@ -523,7 +523,7 @@ dtype: int64</code></pre>
 <p>Before imputing outliers, you will want to diagnose whether it’s they are natural outliers or not. We will be looking at “Insulin” for example across Age_group, because there are several outliers and NAs, which we will impute below.</p>
 <div class="cell" data-layout-align="right">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Increase font size of all seaborn plot elements</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale <span class="op">=</span> <span class="fl">1.25</span>, rc <span class="op">=</span> {<span class="st">'figure.figsize'</span>:(<span class="dv">8</span>, <span class="dv">8</span>)})</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale <span class="op">=</span> <span class="fl">1.5</span>, rc <span class="op">=</span> {<span class="st">'figure.figsize'</span>:(<span class="dv">8</span>, <span class="dv">8</span>)})</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Change theme to "white"</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"white"</span>)</span>
@@ -693,17 +693,17 @@ dtype: int64</code></pre>
 <h3 class="anchored" data-anchor-id="capping-imputation-aka-winsorizing">Capping Imputation (aka Winsorizing)</h3>
 <p>The Percentile Capping is a method of Imputing the outlier values by replacing those observations outside the lower limit with the value of 5th percentile and those that lie above the upper limit, with the value of 95th percentile of the same dataset.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Winsorizing deals woth outliers, so we don't have to worry about changing to NAs</span></span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Winsorizing deals specifically with outliers, so we don't have to worry about changing outliers to NAs</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># New column for capping imputated data at the lowest and highest 10% of values</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>InsMod[<span class="st">'Ins_Cap'</span>] <span class="op">=</span> stats.mstats.winsorize(InsMod[<span class="st">'Insulin'</span>], limits <span class="op">=</span> [<span class="fl">0.1</span>, <span class="fl">0.1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>InsMod[<span class="st">'Ins_Cap'</span>] <span class="op">=</span> pd.DataFrame(stats.mstats.winsorize(InsMod[<span class="st">'Insulin'</span>], limits <span class="op">=</span> [<span class="fl">0.05</span>, <span class="fl">0.05</span>]))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization of the capping imputation</span></span>
 <span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Original data</span></span>
 <span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>cap_plot <span class="op">=</span> sns.kdeplot(data <span class="op">=</span> InsMod, x <span class="op">=</span> <span class="st">'Insulin'</span>, linewidth <span class="op">=</span> <span class="dv">2</span>, label <span class="op">=</span> <span class="st">"Original"</span>)</span>
 <span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Mode imputation</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Capping imputation</span></span>
 <span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>cap_plot <span class="op">=</span> sns.kdeplot(data <span class="op">=</span> InsMod, x <span class="op">=</span> <span class="st">'Ins_Cap'</span>, linewidth <span class="op">=</span> <span class="dv">2</span>, label <span class="op">=</span> <span class="st">"Capping Imputated"</span>)</span>
 <span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Show legend</span></span>
@@ -711,9 +711,11 @@ dtype: int64</code></pre>
 <span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
 <span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="ImputingLikeDataScientist_files/figure-html/unnamed-chunk-17-11.png" class="img-fluid" width="768"></p>
 </div>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/capping.png" class="img-fluid figure-img"></p>
+</figure>
 </div>
 <hr>
 <section id="pros-and-cons-of-capping" class="level4">
@@ -788,7 +790,7 @@ dtype: int64</code></pre>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create KNN plot for 3 nearest neighbors</span></span>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>knn_comparision(data1, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ImputingLikeDataScientist_files/figure-html/unnamed-chunk-20-13.png" class="img-fluid" width="768"></p>
+<p><img src="ImputingLikeDataScientist_files/figure-html/unnamed-chunk-20-11.png" class="img-fluid" width="768"></p>
 </div>
 </div>
 <p>You can also loop the KNN plots for i nearest neighbors:</p>
@@ -851,7 +853,7 @@ dtype: int64</code></pre>
 <span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
 <span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ImputingLikeDataScientist_files/figure-html/unnamed-chunk-26-15.png" class="img-fluid" width="768"></p>
+<p><img src="ImputingLikeDataScientist_files/figure-html/unnamed-chunk-26-13.png" class="img-fluid" width="768"></p>
 </div>
 </div>
 <hr>
@@ -905,7 +907,7 @@ dtype: int64</code></pre>
 <span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
 <span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ImputingLikeDataScientist_files/figure-html/unnamed-chunk-28-17.png" class="img-fluid" width="768"></p>
+<p><img src="ImputingLikeDataScientist_files/figure-html/unnamed-chunk-28-15.png" class="img-fluid" width="768"></p>
 </div>
 </div>
 <hr>
