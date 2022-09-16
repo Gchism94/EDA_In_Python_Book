@@ -2,7 +2,7 @@ project:
   type: book
 
 book:
-  title: "Data 7 Exploratory Data Analysis In Python Book"
+  title: "Data7 Exploratory Data Analysis In Python Book"
   author: "Greg Chism"
   cover-image: cover.png
   chapters:
@@ -15,7 +15,7 @@ book:
     - CorrelateLikeDataMaster.qmd
 
 
-  repo-url: https://github.com/Gchism94/Data7_EDA_In_Python
+  repo-url: https://github.com/Gchism94/Data7_EDA_In_Python_Book
 
 bibliography: references.bib
 

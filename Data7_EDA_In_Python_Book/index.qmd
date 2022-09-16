@@ -1,6 +1,6 @@
 # UArizona Data7 Exploratory Data Analysis In Python Book! {.unnumbered}
 
-Here you will find a collection of workshops prepared by the staff of the [Data Science Institute](https://datascience.arizona.edu/)
+Here you will find a collection of materials prepared by the staff of the [Data Science Institute](https://datascience.arizona.edu/)
 
 ------------------------------------------------------------------------
 
@@ -14,7 +14,7 @@ Exploring a novel data set and produce an HTML interactive reports
 
 ## Exploratory data analysis in Python - Exploring like a data adventurer
 
-### Purpose of the Workshop
+### Purpose of the Materials
 
 Exploring the normality of numerical columns in a novel data set
 
@@ -22,7 +22,7 @@ Exploring the normality of numerical columns in a novel data set
 
 ## Exploratory Data Analysis in Python - Transforming like a Data... Transformer
 
-### Purpose of the Workshop
+### Purpose of the Materials
 
 Using data transformation to correct non-normality in numerical data
 
@@ -30,7 +30,7 @@ Using data transformation to correct non-normality in numerical data
 
 ## Exploratory Data Analysis in Python - Imputating like a Data Scientist
 
-### Purpose of the Workshop
+### Purpose of the Materials
 
 Exploring, visualizing, and imputing outliers and missing values (NAs) in a novel data set
 
@@ -38,7 +38,7 @@ Exploring, visualizing, and imputing outliers and missing values (NAs) in a nove
 
 ## Exploratory Data Analysis in Python - Correlate Like a Data Master
 
-### Purpose of the Workshop
+### Purpose of the Materials
 
 Assess relationships within a novel data set
 
