@@ -695,8 +695,8 @@ dtype: int64</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Winsorizing deals woth outliers, so we don't have to worry about changing to NAs</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Transform NAs with the median imputation</span></span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>InsMod[<span class="st">'Ins_Cap'</span>] <span class="op">=</span> stats.mstats.winsorize(InsMod[<span class="st">'Insulin'</span>], limits <span class="op">=</span> <span class="fl">0.05</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># New column for capping imputated data at the lowest and highest 10% of values</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>InsMod[<span class="st">'Ins_Cap'</span>] <span class="op">=</span> stats.mstats.winsorize(InsMod[<span class="st">'Insulin'</span>], limits <span class="op">=</span> [<span class="fl">0.1</span>, <span class="fl">0.1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization of the capping imputation</span></span>
@@ -725,7 +725,7 @@ dtype: int64</code></pre>
 <p><strong>Cons</strong>:</p>
 <ul>
 <li><p>Capping only modifies the smallest and largest values slightly. This is generally not a good idea since it means we’re just modifying data values for the sake of modifications.</p></li>
-<li><p>If no extreme outliers are present, Winsorization may be unnecessary.</p></li>
+<li><p>If no extreme outliers are present, Winsorization may be unnecessary (e.g., set <code>limits = [0.05, 0.05]</code> and see what happens.</p></li>
 </ul>
 </section>
 </section>
