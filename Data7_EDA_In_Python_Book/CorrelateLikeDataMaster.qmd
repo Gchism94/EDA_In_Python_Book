@@ -219,11 +219,11 @@ The relationships below will have the formula relationship `target ~ predictor`.
 
 ### Numerical Target Variables: Numerical Variable of Interest
 
-`Formula: pLWP (numerical)  ~ Sap_Flow (numerical)`
+`Formula: pLWP (numerical)  ~ mLWP (numerical)`
 
 ```{python}
 # The numerical predictor variable 
-X = data[["Sap_Flow"]]
+X = data[["mLWP"]]
 
 # The numerical target variable
 Y = data[["pLWP"]]
@@ -247,11 +247,11 @@ sns.set(font_scale = 1.25, rc = {'figure.figsize':(8, 8)})
 # Change seaborn plot theme to white
 sns.set_style("white")
 
-# Drop NAs from observed Sap_Flow values
+# Drop NAs from observed mLWP values
 X_Obsv = X.dropna()
 
 # Predicted values
-ObsvVal = X_Obsv.Sap_Flow
+ObsvVal = X_Obsv.mLWP
 
 X_max = ObsvVal.max() # X max
 X_min = ObsvVal.min() # X min
@@ -268,14 +268,14 @@ X_Comp = pd.concat([X_Obsv, X_Pred], axis = 1)
 # Subplots
 fig, (ax1, ax2) = plt.subplots(ncols = 2, nrows = 1)
 
-# Regression plot between Sap_Flow and pLWP
-sns.regplot(data = data, x = "Sap_Flow", y = "pLWP", ax = ax1)
+# Regression plot between mLWP and pLWP
+sns.regplot(data = data, x = "mLWP", y = "pLWP", ax = ax1)
 
 # Set regression plot title
 ax1.set_title("Linear regression")
 
-# Scatterplot with linear predicted vs observed pLWP values
-pred_plot = sns.scatterplot(x = X_Comp.Pred, y = X_Comp.Sap_Flow, alpha = 0.5, s = 50, ax = ax2)
+# Scatterplot with linear predicted vs observed mLWP values
+pred_plot = sns.scatterplot(x = X_Comp.Pred, y = X_Comp.mLWP, alpha = 0.5, s = 50, ax = ax2)
 
 # Set the length for a line segment
 X_ref = Y_ref = np.linspace(X_min, X_max, 100)
@@ -287,7 +287,7 @@ pred_plot.plot(X_ref, X_ref, color = 'red', linewidth = 2)
 pred_plot.set_title("Predicted vs. observed")
 
 # Set x and y axes titles and limits
-pred_plot.set(xlabel = "Predicted value of Sap_Flow", ylabel = "Observed value of Sap_Flow",
+pred_plot.set(xlabel = "Predicted value of mLWP", ylabel = "Observed value of mLWP",
 xlim = (X_min, X_max), ylim = (X_min, X_max))
 
 # Tight margins

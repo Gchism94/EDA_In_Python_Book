@@ -19,6 +19,8 @@ py_install("scikit-learn")
 py_install("missingno")
 
 py_install("statsmodels")
+
+py_install("mlxtend")
 ```
 
 ## Purpose of Workshop
@@ -218,7 +220,7 @@ msno.matrix(dataNA1, figsize = (8, 8), fontsize = 10)
 
 ------------------------------------------------------------------------
 
-## Impute Outliers and NAs
+## Impute Outliers
 
 Removing outliers and NAs can be tricky, but there are methods to do so. I will go over several, and discuss benefits and costs to each.
 
@@ -238,7 +240,7 @@ Before imputing outliers, you will want to diagnose whether it's they are natura
 #| fig-align: right
 
 # Increase font size of all seaborn plot elements
-sns.set(font_scale = 1.25, rc = {'figure.figsize':(8, 8)})
+sns.set(font_scale = 1.5, rc = {'figure.figsize':(8, 8)})
 
 # Change theme to "white"
 sns.set_style("white")
@@ -409,18 +411,18 @@ plt.show()
 The Percentile Capping is a method of Imputing the outlier values by replacing those observations outside the lower limit with the value of 5th percentile and those that lie above the upper limit, with the value of 95th percentile of the same dataset.
 
 ```{python}
-# Winsorizing deals woth outliers, so we don't have to worry about changing to NAs
+# Winsorizing deals specifically with outliers, so we don't have to worry about changing outliers to NAs
 
-# Transform NAs with the median imputation
-InsMod['Ins_Cap'] = stats.mstats.winsorize(InsMod['Insulin'], limits = 0.05)
+# New column for capping imputated data at the lowest and highest 10% of values
+InsMod['Ins_Cap'] = pd.DataFrame(stats.mstats.winsorize(InsMod['Insulin'], limits = [0.05, 0.05]))
 ```
 
-```{python}
+```{python, eval = FALSE}
 # Visualization of the capping imputation
 # Original data
 cap_plot = sns.kdeplot(data = InsMod, x = 'Insulin', linewidth = 2, label = "Original")
 
-# Mode imputation
+# Capping imputation
 cap_plot = sns.kdeplot(data = InsMod, x = 'Ins_Cap', linewidth = 2, label = "Capping Imputated")
 
 # Show legend
@@ -429,6 +431,8 @@ plt.legend()
 # Show plot
 plt.show()
 ```
+
+![](capping.png){fig-align="center"}
 
 ------------------------------------------------------------------------
 
@@ -448,8 +452,8 @@ plt.show()
 
 I will only be addressing a subset of methods for NA imputation, but you can use the mean, median, and mode methods from above as well:
 
-1.  knn: K-nearest neighbors (KNN)
-2.  mice: Multivariate Imputation by Chained Equations (MICE)
+1.  KNN: K-nearest neighbors
+2.  MICE: Multivariate Imputation by Chained Equations
 
 Since our normal `data` has no NA values, we will add the `Insulin` column from the `dataNA` we created earlier and replace the original with it.
 
