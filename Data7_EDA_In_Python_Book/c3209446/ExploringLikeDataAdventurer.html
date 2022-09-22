@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.0.36">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data7 Exploratory Data Analysis In Python Book - Exploratory Data Analysis in Python - Exploring like a Data Adventurer</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./TransformingLikeDataTrans.html" rel="next">
+<link href="./DiagnosingLikeDataDoctor.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title">Exploratory Data Analysis in Python - Exploring like a Data Adventurer</h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">Data7 Exploratory Data Analysis In Python Book</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/Gchism94/Data7_EDA_In_Python_Book" title="Source Code" class="sidebar-tool px-1"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">UArizona Data7 Exploratory Data Analysis In Python Book!</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./DiagnosingLikeDataDoctor.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Diagnosing like a Data Doctor</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ExploringLikeDataAdventurer.html" class="sidebar-item-text sidebar-link active">Exploratory Data Analysis in Python - Exploring like a Data Adventurer</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./TransformingLikeDataTrans.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Transforming like a Data… Transformer</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./ImputingLikeDataScientist.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Imputing like a Data Scientist</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./CorrelateLikeDataMaster.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Correlate Like a Data Master</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#purpose-of-materials" id="toc-purpose-of-materials" class="nav-link active" data-scroll-target="#purpose-of-materials">Purpose of Materials</a></li>
+  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#required-setup" id="toc-required-setup" class="nav-link" data-scroll-target="#required-setup">Required Setup</a></li>
+  <li><a href="#load-and-examine-a-data-set" id="toc-load-and-examine-a-data-set" class="nav-link" data-scroll-target="#load-and-examine-a-data-set">Load and Examine a Data Set</a></li>
+  <li><a href="#diagnose-your-data" id="toc-diagnose-your-data" class="nav-link" data-scroll-target="#diagnose-your-data">Diagnose your Data</a>
+  <ul class="collapse">
+  <li><a href="#box-plot" id="toc-box-plot" class="nav-link" data-scroll-target="#box-plot">Box Plot</a></li>
+  <li><a href="#skewness" id="toc-skewness" class="nav-link" data-scroll-target="#skewness">Skewness</a></li>
+  <li><a href="#kurtosis" id="toc-kurtosis" class="nav-link" data-scroll-target="#kurtosis">Kurtosis</a></li>
+  </ul></li>
+  <li><a href="#describe-your-continuous-data" id="toc-describe-your-continuous-data" class="nav-link" data-scroll-target="#describe-your-continuous-data">Describe your Continuous Data</a></li>
+  <li><a href="#describe-categorical-variables" id="toc-describe-categorical-variables" class="nav-link" data-scroll-target="#describe-categorical-variables">Describe Categorical Variables</a>
+  <ul class="collapse">
+  <li><a href="#group-descriptive-statistics" id="toc-group-descriptive-statistics" class="nav-link" data-scroll-target="#group-descriptive-statistics">Group Descriptive Statistics</a></li>
+  </ul></li>
+  <li><a href="#sec-testing-normality" id="toc-sec-testing-normality" class="nav-link" data-scroll-target="#sec-testing-normality">Testing Normality</a>
+  <ul class="collapse">
+  <li><a href="#normality-of-columns" id="toc-normality-of-columns" class="nav-link" data-scroll-target="#normality-of-columns">Normality of Columns</a></li>
+  <li><a href="#sec-normality-within-groups" id="toc-sec-normality-within-groups" class="nav-link" data-scroll-target="#sec-normality-within-groups">Normality within Groups</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block">Exploratory Data Analysis in Python - Exploring like a Data Adventurer</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    
+  </div>
+  
+
+</header>
+
+<section id="purpose-of-materials" class="level2">
+<h2 class="anchored" data-anchor-id="purpose-of-materials">Purpose of Materials</h2>
+<p><strong>Exploring the normality of numerical columns in a novel data set</strong></p>
+<hr>
+</section>
+<section id="objectives" class="level2">
+<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<ol type="1">
+<li>Using summary statistics to better understand individual columns in a data set.</li>
+<li>Assessing data normality in numerical columns.</li>
+<li>Assessing data normality within groups.</li>
+</ol>
+<hr>
+</section>
+<section id="required-setup" class="level2">
+<h2 class="anchored" data-anchor-id="required-setup">Required Setup</h2>
+<p>We first need to prepare our environment with the necessary libraries and set a global theme for publishable plots in seaborn.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Import all required libraries</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co"># Data analysis and manipulation</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Working with arrays</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical visualization</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Matlab plotting for Python</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Data analysis</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statistics <span class="im">as</span> stat</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictive data analysis: process data </span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> preprocessing <span class="im">as</span> pproc</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> scipy.stats <span class="im">as</span> stats</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualizing missing values</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> missingno <span class="im">as</span> msno</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Statistical modeling</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co"># increase font size of all seaborn plot elements</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale <span class="op">=</span> <span class="fl">1.25</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+<section id="load-and-examine-a-data-set" class="level2">
+<h2 class="anchored" data-anchor-id="load-and-examine-a-data-set">Load and Examine a Data Set</h2>
+<p>We will be using open source data from UArizona researchers that investigates the effects of climate change on canopy trees. <span class="citation" data-cites="meredith2021">(<a href="#ref-meredith2021" role="doc-biblioref">Meredith, Ladd, and Werner 2021</a>)</span></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read csv </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(<span class="st">"data/Data_Fig2_Repo.csv"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># What does the data look like</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>data.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      Date                Group    Sap_Flow  TWaterFlux      pLWP      mLWP
+0  10/4/19  Drought-sens-canopy  184.040975   82.243292 -0.263378 -0.679769
+1  10/4/19   Drought-sens-under    2.475989    1.258050 -0.299669 -0.761326
+2  10/4/19   Drought-tol-canopy   10.598949    4.405479 -0.437556 -0.722557
+3  10/4/19    Drought-tol-under    4.399854    2.055276 -0.205224 -0.702858
+4  10/5/19  Drought-sens-canopy  182.905444   95.865255 -0.276928 -0.708261</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="diagnose-your-data" class="level2">
+<h2 class="anchored" data-anchor-id="diagnose-your-data">Diagnose your Data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># What are the properties of the data</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>diagnose <span class="op">=</span> data.info()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 588 entries, 0 to 587
+Data columns (total 6 columns):
+ #   Column      Non-Null Count  Dtype  
+---  ------      --------------  -----  
+ 0   Date        588 non-null    object 
+ 1   Group       588 non-null    object 
+ 2   Sap_Flow    480 non-null    float64
+ 3   TWaterFlux  588 non-null    float64
+ 4   pLWP        276 non-null    float64
+ 5   mLWP        308 non-null    float64
+dtypes: float64(4), object(2)
+memory usage: 27.7+ KB</code></pre>
+</div>
+</div>
+<ul>
+<li><code>Column</code>: name of each variable</li>
+<li><code>Non-Null Count</code>: number of missing values</li>
+<li><code>DType</code>: data type of each variable</li>
+</ul>
+<hr>
+<section id="box-plot" class="level3">
+<h3 class="anchored" data-anchor-id="box-plot">Box Plot</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://d33wubrfki0l68.cloudfront.net/6a759d8217be119e3409d1eb8e6cd78913bcc86f/c1995/img/evol-ggplot/boxplot.png" class="img-fluid figure-img" alt="Boxplot showing the IQR, lower and upper quartiles, median, and outliers"></p>
+<p></p><figcaption class="figure-caption">Image Credit: <a href="https://www.cedricscherer.com/2019/05/17/the-evolution-of-a-ggplot-ep.-1/">CÉDRIC SCHERER</a></figcaption><p></p>
+</figure>
+</div>
+<hr>
+</section>
+<section id="skewness" class="level3">
+<h3 class="anchored" data-anchor-id="skewness">Skewness</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://aakinshin.net/posts/misleading-skewness/img/skew_intro-dark.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">(c) <a href="https://aakinshin.net/posts/misleading-skewness/">Andrey Akinshin</a></figcaption><p></p>
+</figure>
+</div>
+<hr>
+<section id="note" class="level4">
+<h4 class="anchored" data-anchor-id="note"><strong>NOTE</strong></h4>
+<ul>
+<li>“Skewness” has multiple definitions. Several underlying equations mey be at play</li>
+<li>Skewness is “designed” for distributions with one peak (<em>unimodal</em>); it’s meaningless for distributions with multiple peaks (<em>multimodal</em>).</li>
+<li>Most default skewness definitions are not robust: a single outlier could completely distort the skewness value.</li>
+<li>We can’t make conclusions about the locations of the mean and the median based on the skewness sign.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="kurtosis" class="level3">
+<h3 class="anchored" data-anchor-id="kurtosis">Kurtosis</h3>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://aakinshin.net/posts/misleading-kurtosis/img/kurt_intro-dark.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption">(c) <a href="https://aakinshin.net/posts/misleading-kurtosis/">Andrey Akinshin</a></figcaption><p></p>
+</figure>
+</div>
+<hr>
+<p><strong>NOTE</strong></p>
+<ul>
+<li>There are multiple definitions of kurtosis - i.e., “kurtosis” and “excess kurtosis,” but there are other definitions of this measure.</li>
+<li>Kurtosis may work fine for distributions with one peak (<em>unimodal</em>); it’s meaningless for distributions with multiple peaks (<em>multimodal</em>).</li>
+<li>The classic definition of kurtosis is not robust: it could be easily spoiled by extreme outliers.</li>
+</ul>
+<hr>
+</section>
+</section>
+<section id="describe-your-continuous-data" class="level2">
+<h2 class="anchored" data-anchor-id="describe-your-continuous-data">Describe your Continuous Data</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Summary statistics of our numerical columns</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data.describe()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>         Sap_Flow  TWaterFlux        pLWP        mLWP
+count  480.000000  588.000000  276.000000  308.000000
+mean    25.091576   11.925722   -0.609055   -1.029703
+std     40.520386   19.048809    0.227151    0.295834
+min      0.172630    0.101381   -1.433333   -1.812151
+25%      2.454843    1.293764   -0.714008   -1.227326
+50%      5.815661    2.995357   -0.586201   -0.946656
+75%     16.371703    7.577102   -0.450000   -0.808571
+max    184.040975   96.012719   -0.205224   -0.545165</code></pre>
+</div>
+</div>
+<ul>
+<li><p><code>count</code>: number of observations</p></li>
+<li><p><code>mean</code>: arithmetic mean (average value)</p></li>
+<li><p><code>std</code>: standard deviation</p></li>
+<li><p><code>min</code>: minimum value</p></li>
+<li><p><code>25%</code>: 1/4 quartile, 25th percentile</p></li>
+<li><p><code>50%</code>: median, 50th percentile</p></li>
+<li><p><code>75%</code>: 3/4 quartile, 75th percentile</p></li>
+<li><p><code>max</code>: maximum value</p></li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a copy of the data </span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>dataCopy <span class="op">=</span> data.copy()</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only numerical columns</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>dataRed <span class="op">=</span> dataCopy.select_dtypes(include <span class="op">=</span> np.number)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># List of numerical columns</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>dataRedColsList <span class="op">=</span> dataRed.columns[...]</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="co"># For all values in the numerical column list from above</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i_col <span class="kw">in</span> dataRedColsList:</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># List of the values in i_col</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  dataRed_i <span class="op">=</span> dataRed.loc[:,i_col]</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define the 25th and 75th percentiles</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  q25, q75 <span class="op">=</span> <span class="bu">round</span>((dataRed_i.quantile(q <span class="op">=</span> <span class="fl">0.25</span>)), <span class="dv">3</span>), <span class="bu">round</span>((dataRed_i.quantile(q <span class="op">=</span> <span class="fl">0.75</span>)), <span class="dv">3</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define the interquartile range from the 25th and 75th percentiles defined above</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  IQR <span class="op">=</span> <span class="bu">round</span>((q75 <span class="op">-</span> q25), <span class="dv">3</span>)</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Calculate the outlier cutoff </span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  cut_off <span class="op">=</span> IQR <span class="op">*</span> <span class="fl">1.5</span></span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Define lower and upper cut-offs</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  lower, upper <span class="op">=</span> <span class="bu">round</span>((q25 <span class="op">-</span> cut_off), <span class="dv">3</span>), <span class="bu">round</span>((q75 <span class="op">+</span> cut_off), <span class="dv">3</span>)</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Skewness</span></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  skewness <span class="op">=</span> <span class="bu">round</span>((dataRed_i.skew()), <span class="dv">3</span>) </span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Kurtosis</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  kurtosis <span class="op">=</span> <span class="bu">round</span>((dataRed_i.kurt()), <span class="dv">3</span>)</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Number of outliers</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>  outliers <span class="op">=</span> dataRed_i[(dataRed_i <span class="op">&lt;</span> lower) <span class="op">|</span> (dataRed_i <span class="op">&gt;</span> upper)].count()</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Print a blank row</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">''</span>)</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Print the column name</span></span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(i_col)</span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a>  <span class="co"># For each value of i_col, print the 25th and 75th percentiles and IQR</span></span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">'q25 ='</span>, q25, <span class="st">'q75 ='</span>, q75, <span class="st">'IQR ='</span>, IQR)</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-45"><a href="#cb8-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Print the lower and upper cut-offs</span></span>
+<span id="cb8-46"><a href="#cb8-46" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">'lower, upper:'</span>, lower, upper)</span>
+<span id="cb8-47"><a href="#cb8-47" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-48"><a href="#cb8-48" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Print skewness and kurtosis</span></span>
+<span id="cb8-49"><a href="#cb8-49" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">'skewness ='</span>, skewness, <span class="st">'kurtosis ='</span>, kurtosis)</span>
+<span id="cb8-50"><a href="#cb8-50" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-51"><a href="#cb8-51" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Count the number of outliers outside the (lower, upper) limits, print that value</span></span>
+<span id="cb8-52"><a href="#cb8-52" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">'Number of Outliers: '</span>, outliers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Sap_Flow
+q25 = 2.455 q75 = 16.372 IQR = 13.917
+lower, upper: -18.42 37.248
+skewness = 2.153 kurtosis = 4.197
+Number of Outliers:  116
+
+TWaterFlux
+q25 = 1.294 q75 = 7.577 IQR = 6.283
+lower, upper: -8.13 17.002
+skewness = 2.081 kurtosis = 3.884
+Number of Outliers:  139
+
+pLWP
+q25 = -0.714 q75 = -0.45 IQR = 0.264
+lower, upper: -1.11 -0.054
+skewness = -1.105 kurtosis = 1.767
+Number of Outliers:  12
+
+mLWP
+q25 = -1.227 q75 = -0.809 IQR = 0.418
+lower, upper: -1.854 -0.182
+skewness = -0.797 kurtosis = -0.181
+Number of Outliers:  0</code></pre>
+</div>
+</div>
+<ul>
+<li><code>q25</code>: 1/4 quartile, 25th percentile</li>
+<li><code>q75</code>: 3/4 quartile, 75th percentile</li>
+<li><code>IQR</code>: interquartile range (q75-q25)</li>
+<li><code>lower</code>: lower limit of <span class="math inline">\(1.5*IQR\)</span> used to calculate outliers</li>
+<li><code>upper</code>: upper limit of <span class="math inline">\(1.5*IQR\)</span> used to calculate outliers</li>
+<li><code>skewness</code>: skewness</li>
+<li><code>kurtosis</code>: kurtosis</li>
+</ul>
+<hr>
+</section>
+<section id="describe-categorical-variables" class="level2">
+<h2 class="anchored" data-anchor-id="describe-categorical-variables">Describe Categorical Variables</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only categorical columns (objects) </span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>data.describe(exclude<span class="op">=</span>[np.number]) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>           Date                Group
+count       588                  588
+unique      147                    4
+top     10/4/19  Drought-sens-canopy
+freq          4                  147</code></pre>
+</div>
+</div>
+<hr>
+<section id="group-descriptive-statistics" class="level3">
+<h3 class="anchored" data-anchor-id="group-descriptive-statistics">Group Descriptive Statistics</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Grouped describe by one column, stacked </span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>Groups <span class="op">=</span> data.groupby(<span class="st">'Group'</span>).describe().unstack(<span class="dv">1</span>)</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Print all rows</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(Groups.to_string())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   Group              
+Sap_Flow    count  Drought-sens-canopy    120.000000
+                   Drought-sens-under     120.000000
+                   Drought-tol-canopy     120.000000
+                   Drought-tol-under      120.000000
+            mean   Drought-sens-canopy     85.269653
+                   Drought-sens-under       1.448825
+                   Drought-tol-canopy       9.074309
+                   Drought-tol-under        4.573516
+            std    Drought-sens-canopy     41.313962
+                   Drought-sens-under       0.803858
+                   Drought-tol-canopy       1.395670
+                   Drought-tol-under        0.902430
+            min    Drought-sens-canopy     33.370450
+                   Drought-sens-under       0.172630
+                   Drought-tol-canopy       5.904610
+                   Drought-tol-under        2.171780
+            25%    Drought-sens-canopy     53.975162
+                   Drought-sens-under       0.534165
+                   Drought-tol-canopy       8.119410
+                   Drought-tol-under        4.053346
+            50%    Drought-sens-canopy     76.717782
+                   Drought-sens-under       1.665492
+                   Drought-tol-canopy       9.286552
+                   Drought-tol-under        4.944842
+            75%    Drought-sens-canopy     94.068107
+                   Drought-sens-under       2.194299
+                   Drought-tol-canopy      10.404117
+                   Drought-tol-under        5.139685
+            max    Drought-sens-canopy    184.040975
+                   Drought-sens-under       2.475989
+                   Drought-tol-canopy      10.705455
+                   Drought-tol-under        5.726712
+TWaterFlux  count  Drought-sens-canopy    147.000000
+                   Drought-sens-under     147.000000
+                   Drought-tol-canopy     147.000000
+                   Drought-tol-under      147.000000
+            mean   Drought-sens-canopy     40.404061
+                   Drought-sens-under       0.751770
+                   Drought-tol-canopy       4.357234
+                   Drought-tol-under        2.189824
+            std    Drought-sens-canopy     19.027997
+                   Drought-sens-under       0.429073
+                   Drought-tol-canopy       0.940353
+                   Drought-tol-under        0.597511
+            min    Drought-sens-canopy     12.377738
+                   Drought-sens-under       0.101381
+                   Drought-tol-canopy       2.036843
+                   Drought-tol-under        0.953906
+            25%    Drought-sens-canopy     25.220908
+                   Drought-sens-under       0.274190
+                   Drought-tol-canopy       3.601341
+                   Drought-tol-under        1.735003
+            50%    Drought-sens-canopy     38.630891
+                   Drought-sens-under       0.824875
+                   Drought-tol-canopy       4.460778
+                   Drought-tol-under        2.198131
+            75%    Drought-sens-canopy     50.096197
+                   Drought-sens-under       1.112890
+                   Drought-tol-canopy       5.112844
+                   Drought-tol-under        2.686605
+            max    Drought-sens-canopy     96.012719
+                   Drought-sens-under       1.801823
+                   Drought-tol-canopy       5.976890
+                   Drought-tol-under        3.654336
+pLWP        count  Drought-sens-canopy     69.000000
+                   Drought-sens-under      69.000000
+                   Drought-tol-canopy      69.000000
+                   Drought-tol-under       69.000000
+            mean   Drought-sens-canopy     -0.669932
+                   Drought-sens-under      -0.696138
+                   Drought-tol-canopy      -0.629909
+                   Drought-tol-under       -0.440243
+            std    Drought-sens-canopy      0.246390
+                   Drought-sens-under       0.283935
+                   Drought-tol-canopy       0.095571
+                   Drought-tol-under        0.131879
+            min    Drought-sens-canopy     -1.299263
+                   Drought-sens-under      -1.433333
+                   Drought-tol-canopy      -0.863656
+                   Drought-tol-under       -0.746667
+            25%    Drought-sens-canopy     -0.790573
+                   Drought-sens-under      -0.800000
+                   Drought-tol-canopy      -0.706479
+                   Drought-tol-under       -0.520487
+            50%    Drought-sens-canopy     -0.705942
+                   Drought-sens-under      -0.592118
+                   Drought-tol-canopy      -0.602841
+                   Drought-tol-under       -0.406439
+            75%    Drought-sens-canopy     -0.473290
+                   Drought-sens-under      -0.521217
+                   Drought-tol-canopy      -0.571356
+                   Drought-tol-under       -0.360789
+            max    Drought-sens-canopy     -0.263378
+                   Drought-sens-under      -0.299669
+                   Drought-tol-canopy      -0.437556
+                   Drought-tol-under       -0.205224
+mLWP        count  Drought-sens-canopy     77.000000
+                   Drought-sens-under      77.000000
+                   Drought-tol-canopy      77.000000
+                   Drought-tol-under       77.000000
+            mean   Drought-sens-canopy     -1.319148
+                   Drought-sens-under      -1.097537
+                   Drought-tol-canopy      -0.892554
+                   Drought-tol-under       -0.809572
+            std    Drought-sens-canopy      0.298107
+                   Drought-sens-under       0.263522
+                   Drought-tol-canopy       0.091729
+                   Drought-tol-under        0.170603
+            min    Drought-sens-canopy     -1.812151
+                   Drought-sens-under      -1.808333
+                   Drought-tol-canopy      -1.073619
+                   Drought-tol-under       -1.168716
+            25%    Drought-sens-canopy     -1.525563
+                   Drought-sens-under      -1.335521
+                   Drought-tol-canopy      -0.945841
+                   Drought-tol-under       -0.907041
+            50%    Drought-sens-canopy     -1.354771
+                   Drought-sens-under      -1.054159
+                   Drought-tol-canopy      -0.890061
+                   Drought-tol-under       -0.735647
+            75%    Drought-sens-canopy     -1.111942
+                   Drought-sens-under      -0.907564
+                   Drought-tol-canopy      -0.828777
+                   Drought-tol-under       -0.699087
+            max    Drought-sens-canopy     -0.679769
+                   Drought-sens-under      -0.546152
+                   Drought-tol-canopy      -0.707789
+                   Drought-tol-under       -0.545165</code></pre>
+</div>
+</div>
+<hr>
+</section>
+</section>
+<section id="sec-testing-normality" class="level2">
+<h2 class="anchored" data-anchor-id="sec-testing-normality">Testing Normality</h2>
+<ul>
+<li>Shapiro-Wilk test &amp; Q-Q plots</li>
+<li>Testing overall normality of two columns</li>
+<li>Testing normality of groups</li>
+</ul>
+<hr>
+<section id="normality-of-columns" class="level3">
+<h3 class="anchored" data-anchor-id="normality-of-columns">Normality of Columns</h3>
+<hr>
+<section id="shapiro-wilk-test" class="level4">
+<h4 class="anchored" data-anchor-id="shapiro-wilk-test">Shapiro-Wilk Test</h4>
+<p>Shapiro-Wilk test looks at whether a target distribution is sample form a normal distribution</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a copy of the data </span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>dataCopy <span class="op">=</span> data.copy()</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove NAs</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>dataCopyFin <span class="op">=</span> dataCopy.dropna()</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify desired column</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>i_col <span class="op">=</span> dataCopyFin.Sap_Flow</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Normality test</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>stat, p <span class="op">=</span> stats.shapiro(i_col)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Shapiro-Wilk Test for Normality'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Shapiro-Wilk Test for Normality</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">''</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Sap_Flow'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Sap_Flow</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">'Statistic = </span><span class="sc">%.3f</span><span class="st">, p = </span><span class="sc">%.3f</span><span class="st">'</span> <span class="op">%</span> (stat, p))</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Interpret</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Statistic = 0.603, p = 0.000</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> p <span class="op">&gt;</span> alpha:</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">'Sample looks Gaussian (fail to reject H0)'</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">'Sample does not look Gaussian (reject H0)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Sample does not look Gaussian (reject H0)</code></pre>
+</div>
+</div>
+<p>You can also run the Shapiro-Wilk test on all numerical columns with a for-loop</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a copy of the data </span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>dataCopy <span class="op">=</span> data.copy()</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove NAs</span></span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>dataCopyFin <span class="op">=</span> dataCopy.dropna()</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only numerical columns</span></span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>dataRed <span class="op">=</span> dataCopyFin.select_dtypes(include <span class="op">=</span> np.number)</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># List of numerical columns</span></span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>dataRedColsList <span class="op">=</span> dataRed.columns[...]</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a><span class="co"># For all values in the numerical column list from above</span></span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i_col <span class="kw">in</span> dataRedColsList:</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># List of the values in i_col</span></span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  dataRed_i <span class="op">=</span> dataRed.loc[:,i_col]</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Normality test</span></span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  stat, p <span class="op">=</span> stats.shapiro(dataRed_i)</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Print a blank, the column name, the statistic and p-value</span></span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">''</span>)</span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(i_col)</span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">'Statistic = </span><span class="sc">%.3f</span><span class="st">, p = </span><span class="sc">%.3f</span><span class="st">'</span> <span class="op">%</span> (stat, p))</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Interpret</span></span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>  alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Print the interpretation</span></span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> p <span class="op">&gt;</span> alpha:</span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'Sample looks Gaussian (fail to reject H0)'</span>)</span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">'Sample does not look Gaussian (reject H0)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Sap_Flow
+Statistic = 0.603, p = 0.000
+Sample does not look Gaussian (reject H0)
+
+TWaterFlux
+Statistic = 0.600, p = 0.000
+Sample does not look Gaussian (reject H0)
+
+pLWP
+Statistic = 0.929, p = 0.000
+Sample does not look Gaussian (reject H0)
+
+mLWP
+Statistic = 0.940, p = 0.000
+Sample does not look Gaussian (reject H0)</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="q-q-plots" class="level4">
+<h4 class="anchored" data-anchor-id="q-q-plots">Q-Q Plots</h4>
+<p>Plots of the quartiles of a target data set and plot it against predicted quartiles from a normal distribution.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Change theme to "white"</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"white"</span>)</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a copy of the data </span></span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>dataCopy <span class="op">=</span> data.copy()</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove NAs</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>dataCopyFin <span class="op">=</span> dataCopy.dropna()</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Specify desired column</span></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>i_col <span class="op">=</span> dataCopyFin.Sap_Flow</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Subplots</span></span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>fig, (ax1, ax2) <span class="op">=</span> plt.subplots(ncols <span class="op">=</span> <span class="dv">2</span>, nrows <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Density plot</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>sns.kdeplot(i_col, linewidth <span class="op">=</span> <span class="dv">5</span>, ax <span class="op">=</span> ax1)</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>ax1.set_title(<span class="st">'Sap_Flow Density plot'</span>)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Q-Q plot</span></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>sm.qqplot(i_col, line<span class="op">=</span><span class="st">'s'</span>, ax <span class="op">=</span> ax2)</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>ax2.set_title(<span class="st">'Sap_Flow Q-Q plot'</span>)</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="ExploringLikeDataAdventurer_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>You can also produce these plots for all numerical columns with a for-loop.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Change theme to "white"</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"white"</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a copy of the data </span></span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>dataCopy <span class="op">=</span> data.copy()</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove NAs</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>dataCopyFin <span class="op">=</span> dataCopy.dropna()</span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only numerical columns</span></span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>dataRed <span class="op">=</span> dataCopyFin.select_dtypes(include <span class="op">=</span> np.number)</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine multiple plots, the number of columns and rows is derived from the number of numerical columns from above. </span></span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Overall figure that subplots fill</span></span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(ncols <span class="op">=</span> <span class="dv">2</span>, nrows <span class="op">=</span> <span class="dv">4</span>, sharex <span class="op">=</span> <span class="va">True</span>, figsize <span class="op">=</span> (<span class="dv">4</span>, <span class="dv">4</span>))</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Fill the subplots</span></span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k, ax <span class="kw">in</span> <span class="bu">zip</span>(dataRed.columns, np.ravel(axes)):</span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Subplots</span></span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>    fig, (ax1, ax2) <span class="op">=</span> plt.subplots(ncols <span class="op">=</span> <span class="dv">2</span>, nrows <span class="op">=</span> <span class="dv">1</span>)</span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Density plot</span></span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>    sns.kdeplot(dataRed[k], linewidth <span class="op">=</span> <span class="dv">5</span>, ax <span class="op">=</span> ax1)</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a>    ax1.set_title(<span class="ss">f'</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss"> Density Plot'</span>)</span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Q-Q plot</span></span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>    sm.qqplot(dataRed[k], line<span class="op">=</span><span class="st">'s'</span>, ax <span class="op">=</span> ax2)</span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>    ax2.set_title(<span class="ss">f'</span><span class="sc">{</span>k<span class="sc">}</span><span class="ss"> QQ Plot'</span>)</span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+</section>
+</section>
+<section id="sec-normality-within-groups" class="level3">
+<h3 class="anchored" data-anchor-id="sec-normality-within-groups">Normality within Groups</h3>
+<p>Looking within Age_group at the subgroup normality.</p>
+<section id="shapiro-wilk-test-1" class="level4">
+<h4 class="anchored" data-anchor-id="shapiro-wilk-test-1">Shapiro-Wilk Test</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a copy of the data </span></span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>dataCopy <span class="op">=</span> data.copy()</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove NAs</span></span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>dataCopyFin <span class="op">=</span> dataCopy.dropna()</span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot the data from long-to-wide with pivot, using Date as the index, so that a column is created for each Group and numerical column subset</span></span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>dataPivot <span class="op">=</span> dataCopyFin.pivot(index <span class="op">=</span> <span class="st">'Date'</span>, columns <span class="op">=</span> <span class="st">'Group'</span>, values <span class="op">=</span> [<span class="st">'Sap_Flow'</span>, <span class="st">'TWaterFlux'</span>, <span class="st">'pLWP'</span>, <span class="st">'mLWP'</span>])</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only numerical columns</span></span>
+<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>dataRed <span class="op">=</span> dataPivot.select_dtypes(include <span class="op">=</span> np.number)</span>
+<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co"># List of numerical columns</span></span>
+<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>dataRedColsList <span class="op">=</span> dataRed.columns[...]</span>
+<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a><span class="co"># For all values in the numerical column list from above</span></span>
+<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i_col <span class="kw">in</span> dataRedColsList:</span>
+<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># List of the values in i_col</span></span>
+<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>  dataRed_i <span class="op">=</span> dataRed.loc[:,i_col]</span>
+<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># normality test</span></span>
+<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>  stat, p <span class="op">=</span> stats.shapiro(dataRed_i)</span>
+<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">''</span>)</span>
+<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(i_col)</span>
+<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">'Statistics = </span><span class="sc">%.3f</span><span class="st">, p = </span><span class="sc">%.3f</span><span class="st">'</span> <span class="op">%</span> (stat, p))</span>
+<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># interpret</span></span>
+<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>  alpha <span class="op">=</span> <span class="fl">0.05</span></span>
+<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> p <span class="op">&gt;</span> alpha:</span>
+<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">'Sample looks Gaussian (fail to reject H0)'</span>)</span>
+<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">'Sample does not look Gaussian (reject H0)'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+('Sap_Flow', 'Drought-sens-canopy')
+Statistics = 0.869, p = 0.000
+Sample does not look Gaussian (reject H0)
+
+('Sap_Flow', 'Drought-sens-under')
+Statistics = 0.889, p = 0.000
+Sample does not look Gaussian (reject H0)
+
+('Sap_Flow', 'Drought-tol-canopy')
+Statistics = 0.950, p = 0.008
+Sample does not look Gaussian (reject H0)
+
+('Sap_Flow', 'Drought-tol-under')
+Statistics = 0.908, p = 0.000
+Sample does not look Gaussian (reject H0)
+
+('TWaterFlux', 'Drought-sens-canopy')
+Statistics = 0.885, p = 0.000
+Sample does not look Gaussian (reject H0)
+
+('TWaterFlux', 'Drought-sens-under')
+Statistics = 0.856, p = 0.000
+Sample does not look Gaussian (reject H0)
+
+('TWaterFlux', 'Drought-tol-canopy')
+Statistics = 0.973, p = 0.147
+Sample looks Gaussian (fail to reject H0)
+
+('TWaterFlux', 'Drought-tol-under')
+Statistics = 0.977, p = 0.233
+Sample looks Gaussian (fail to reject H0)
+
+('pLWP', 'Drought-sens-canopy')
+Statistics = 0.969, p = 0.086
+Sample looks Gaussian (fail to reject H0)
+
+('pLWP', 'Drought-sens-under')
+Statistics = 0.867, p = 0.000
+Sample does not look Gaussian (reject H0)
+
+('pLWP', 'Drought-tol-canopy')
+Statistics = 0.952, p = 0.010
+Sample does not look Gaussian (reject H0)
+
+('pLWP', 'Drought-tol-under')
+Statistics = 0.964, p = 0.044
+Sample does not look Gaussian (reject H0)
+
+('mLWP', 'Drought-sens-canopy')
+Statistics = 0.962, p = 0.034
+Sample does not look Gaussian (reject H0)
+
+('mLWP', 'Drought-sens-under')
+Statistics = 0.956, p = 0.016
+Sample does not look Gaussian (reject H0)
+
+('mLWP', 'Drought-tol-canopy')
+Statistics = 0.962, p = 0.034
+Sample does not look Gaussian (reject H0)
+
+('mLWP', 'Drought-tol-under')
+Statistics = 0.852, p = 0.000
+Sample does not look Gaussian (reject H0)</code></pre>
+</div>
+</div>
+<hr>
+</section>
+<section id="q-q-plots-1" class="level4">
+<h4 class="anchored" data-anchor-id="q-q-plots-1">Q-Q Plots</h4>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Make a copy of the data </span></span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>dataCopy <span class="op">=</span> data.copy()</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Remove NAs</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>dataCopyFin <span class="op">=</span> dataCopy.dropna()</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Pivot the data from long-to-wide with pivot, using Date as the index, so that a column is created for each Group and numerical column subset</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>dataPivot <span class="op">=</span> dataCopyFin.pivot(index <span class="op">=</span> <span class="st">'Date'</span>, columns <span class="op">=</span> <span class="st">'Group'</span>, values <span class="op">=</span> [<span class="st">'Sap_Flow'</span>, <span class="st">'TWaterFlux'</span>, <span class="st">'pLWP'</span>, <span class="st">'mLWP'</span>])</span>
+<span id="cb30-9"><a href="#cb30-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-10"><a href="#cb30-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only numerical columns</span></span>
+<span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>dataRed <span class="op">=</span> dataPivot.select_dtypes(include <span class="op">=</span> np.number)</span>
+<span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-13"><a href="#cb30-13" aria-hidden="true" tabindex="-1"></a><span class="co"># Combine multiple plots, the number of columns and rows is derived from the number of numerical columns from above. </span></span>
+<span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(ncols <span class="op">=</span> <span class="dv">2</span>, nrows <span class="op">=</span> <span class="dv">8</span>, sharex <span class="op">=</span> <span class="va">True</span>, figsize <span class="op">=</span> (<span class="dv">2</span> <span class="op">*</span> <span class="dv">4</span>, <span class="dv">8</span> <span class="op">*</span> <span class="dv">4</span>))</span>
+<span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-16"><a href="#cb30-16" aria-hidden="true" tabindex="-1"></a><span class="co"># Generate figures for all numerical grouped data subsets</span></span>
+<span id="cb30-17"><a href="#cb30-17" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> k, ax <span class="kw">in</span> <span class="bu">zip</span>(dataRed.columns, np.ravel(axes)):</span>
+<span id="cb30-18"><a href="#cb30-18" aria-hidden="true" tabindex="-1"></a>    sm.qqplot(dataRed[k], line <span class="op">=</span> <span class="st">'s'</span>, ax <span class="op">=</span> ax)</span>
+<span id="cb30-19"><a href="#cb30-19" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="ss">f'</span><span class="sc">{</span>k<span class="sc">}</span><span class="ch">\n</span><span class="ss"> QQ Plot'</span>)</span>
+<span id="cb30-20"><a href="#cb30-20" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb30-21"><a href="#cb30-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="ExploringLikeDataAdventurer_files/figure-html/unnamed-chunk-13-3.png" class="img-fluid" width="768"></p>
+</div>
+</div>
+
+
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-meredith2021" class="csl-entry" role="doc-biblioentry">
+Meredith, Laura, S. Nemiah Ladd, and Christiane Werner. 2021. <span>“Data for <span>"</span>Ecosystem Fluxes During Drought and Recovery in an Experimental Forest<span>"</span>.”</span> University of Arizona Research Data Repository. <a href="https://doi.org/10.25422/AZU.DATA.14632593.V1">https://doi.org/10.25422/AZU.DATA.14632593.V1</a>.
+</div>
+</div>
+</section>
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    setTimeout(function() {
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      let href = ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const cites = ref.parentNode.getAttribute('data-cites').split(' ');
+    tippyHover(ref, function() {
+      var popup = window.document.createElement('div');
+      cites.forEach(function(cite) {
+        var citeDiv = window.document.createElement('div');
+        citeDiv.classList.add('hanging-indent');
+        citeDiv.classList.add('csl-entry');
+        var biblioDiv = window.document.getElementById('ref-' + cite);
+        if (biblioDiv) {
+          citeDiv.innerHTML = biblioDiv.innerHTML;
+        }
+        popup.appendChild(citeDiv);
+      });
+      return popup.innerHTML;
+    });
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./DiagnosingLikeDataDoctor.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exploratory Data Analysis in Python - Diagnosing like a Data Doctor</span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./TransformingLikeDataTrans.html" class="pagination-link">
+        <span class="nav-page-text">Exploratory Data Analysis in Python - Transforming like a Data… Transformer</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>
