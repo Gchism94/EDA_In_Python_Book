@@ -1,0 +1,463 @@
+# Exploratory Data Analysis in Python - Exploring like a Data Adventurer {.unnumbered}
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE) 
+
+options(repos = list(CRAN = "http://cran.rstudio.com/"))
+
+install.packages("reticulate")
+
+library(reticulate)
+
+py_install("pandas")
+
+py_install("seaborn")
+
+py_install("scikit-learn")
+
+py_install("tabulate")
+
+py_install("missingno")
+
+py_install("statsmodels")
+```
+
+## Purpose of Materials
+
+**Exploring the normality of numerical columns in a novel data set**
+
+------------------------------------------------------------------------
+
+## Objectives
+
+1.  Using summary statistics to better understand individual columns in a data set.
+2.  Assessing data normality in numerical columns.
+3.  Assessing data normality within groups.
+
+------------------------------------------------------------------------
+
+## Required Setup
+
+We first need to prepare our environment with the necessary libraries and set a global theme for publishable plots in seaborn.
+
+```{python, echo = TRUE}
+# Import all required libraries
+# Data analysis and manipulation
+import pandas as pd
+# Working with arrays
+import numpy as np
+# Statistical visualization
+import seaborn as sns
+# Matlab plotting for Python
+import matplotlib.pyplot as plt
+# Data analysis
+import statistics as stat
+# Predictive data analysis: process data 
+from sklearn import preprocessing as pproc
+import scipy.stats as stats
+# Visualizing missing values
+import missingno as msno
+# Statistical modeling
+import statsmodels.api as sm
+
+# increase font size of all seaborn plot elements
+sns.set(font_scale = 1.25)
+```
+
+------------------------------------------------------------------------
+
+## Load and Examine a Data Set
+
+We will be using open source data from UArizona researchers that investigates the effects of climate change on canopy trees. [@meredith2021]
+
+```{python}
+# Read csv 
+data = pd.read_csv("data/Data_Fig2_Repo.csv")
+
+# What does the data look like
+data.head()
+```
+
+------------------------------------------------------------------------
+
+## Diagnose your Data
+
+```{python}
+# What are the properties of the data
+diagnose = data.info()
+```
+
+-   `Column`: name of each variable
+-   `Non-Null Count`: number of missing values
+-   `DType`: data type of each variable
+
+------------------------------------------------------------------------
+
+### Box Plot
+
+![Image Credit: [CÉDRIC SCHERER](https://www.cedricscherer.com/2019/05/17/the-evolution-of-a-ggplot-ep.-1/)](https://d33wubrfki0l68.cloudfront.net/6a759d8217be119e3409d1eb8e6cd78913bcc86f/c1995/img/evol-ggplot/boxplot.png){alt="Image Credit: CÉDRIC SCHERER" fig-alt="Boxplot showing the IQR, lower and upper quartiles, median, and outliers"}
+
+------------------------------------------------------------------------
+
+### Skewness
+
+![(c) [Andrey Akinshin](https://aakinshin.net/posts/misleading-skewness/)](https://aakinshin.net/posts/misleading-skewness/img/skew_intro-dark.png)
+
+------------------------------------------------------------------------
+
+#### **NOTE**
+
+-   "Skewness" has multiple definitions. Several underlying equations mey be at play
+-   Skewness is "designed" for distributions with one peak (*unimodal*); it's meaningless for distributions with multiple peaks (*multimodal*).
+-   Most default skewness definitions are not robust: a single outlier could completely distort the skewness value.
+-   We can't make conclusions about the locations of the mean and the median based on the skewness sign.
+
+------------------------------------------------------------------------
+
+### Kurtosis
+
+![(c) [Andrey Akinshin](https://aakinshin.net/posts/misleading-kurtosis/)](https://aakinshin.net/posts/misleading-kurtosis/img/kurt_intro-dark.png)
+
+------------------------------------------------------------------------
+
+**NOTE**
+
+-   There are multiple definitions of kurtosis - i.e., "kurtosis" and "excess kurtosis," but there are other definitions of this measure.
+-   Kurtosis may work fine for distributions with one peak (*unimodal*); it's meaningless for distributions with multiple peaks (*multimodal*).
+-   The classic definition of kurtosis is not robust: it could be easily spoiled by extreme outliers.
+
+------------------------------------------------------------------------
+
+## Describe your Continuous Data
+
+```{python}
+# Summary statistics of our numerical columns
+data.describe()
+```
+
+-   `count`: number of observations
+
+-   `mean`: arithmetic mean (average value)
+
+-   `std`: standard deviation
+
+-   `min`: minimum value
+
+-   `25%`: 1/4 quartile, 25th percentile
+
+-   `50%`: median, 50th percentile
+
+-   `75%`: 3/4 quartile, 75th percentile
+
+-   `max`: maximum value
+
+```{python}
+# Make a copy of the data 
+dataCopy = data.copy()
+
+# Select only numerical columns
+dataRed = dataCopy.select_dtypes(include = np.number)
+
+# List of numerical columns
+dataRedColsList = dataRed.columns[...]
+
+# For all values in the numerical column list from above
+for i_col in dataRedColsList:
+  # List of the values in i_col
+  dataRed_i = dataRed.loc[:,i_col]
+  
+  # Define the 25th and 75th percentiles
+  q25, q75 = round((dataRed_i.quantile(q = 0.25)), 3), round((dataRed_i.quantile(q = 0.75)), 3)
+  
+  # Define the interquartile range from the 25th and 75th percentiles defined above
+  IQR = round((q75 - q25), 3)
+  
+  # Calculate the outlier cutoff 
+  cut_off = IQR * 1.5
+  
+  # Define lower and upper cut-offs
+  lower, upper = round((q25 - cut_off), 3), round((q75 + cut_off), 3)
+  
+  # Skewness
+  skewness = round((dataRed_i.skew()), 3) 
+  
+  # Kurtosis
+  kurtosis = round((dataRed_i.kurt()), 3)
+  
+  # Number of outliers
+  outliers = dataRed_i[(dataRed_i < lower) | (dataRed_i > upper)].count()
+  
+  # Print a blank row
+  print('')
+  
+  # Print the column name
+  print(i_col)
+  
+  # For each value of i_col, print the 25th and 75th percentiles and IQR
+  print('q25 =', q25, 'q75 =', q75, 'IQR =', IQR)
+  
+  # Print the lower and upper cut-offs
+  print('lower, upper:', lower, upper)
+  
+  # Print skewness and kurtosis
+  print('skewness =', skewness, 'kurtosis =', kurtosis)
+  
+  # Count the number of outliers outside the (lower, upper) limits, print that value
+  print('Number of Outliers: ', outliers)
+
+```
+
+-   `q25`: 1/4 quartile, 25th percentile
+-   `q75`: 3/4 quartile, 75th percentile
+-   `IQR`: interquartile range (q75-q25)
+-   `lower`: lower limit of $1.5*IQR$ used to calculate outliers
+-   `upper`: upper limit of $1.5*IQR$ used to calculate outliers
+-   `skewness`: skewness
+-   `kurtosis`: kurtosis
+
+------------------------------------------------------------------------
+
+## Describe Categorical Variables
+
+```{python}
+# Select only categorical columns (objects) 
+data.describe(exclude=[np.number]) 
+```
+
+------------------------------------------------------------------------
+
+### Group Descriptive Statistics
+
+```{python}
+# Grouped describe by one column, stacked 
+Groups = data.groupby('Group').describe().unstack(1)
+
+# Print all rows
+print(Groups.to_string())
+```
+
+------------------------------------------------------------------------
+
+## Testing Normality {#sec-testing-normality}
+
+-   Shapiro-Wilk test & Q-Q plots
+-   Testing overall normality of two columns
+-   Testing normality of groups
+
+------------------------------------------------------------------------
+
+### Normality of Columns
+
+------------------------------------------------------------------------
+
+#### Shapiro-Wilk Test
+
+Shapiro-Wilk test looks at whether a target distribution is sample form a normal distribution
+
+```{python}
+# Make a copy of the data 
+dataCopy = data.copy()
+
+# Remove NAs
+dataCopyFin = dataCopy.dropna()
+
+# Specify desired column
+i_col = dataCopyFin.Sap_Flow
+
+# Normality test
+stat, p = stats.shapiro(i_col)
+
+print('')
+print('Shapiro-Wilk Test for Normality')
+print('')
+print('Sap_Flow')
+print('Statistic = %.3f, p = %.3f' % (stat, p))
+  
+# Interpret
+alpha = 0.05
+  
+if p > alpha:
+  print('Sample looks Gaussian (fail to reject H0)')
+else:
+  print('Sample does not look Gaussian (reject H0)')
+```
+
+You can also run the Shapiro-Wilk test on all numerical columns with a for-loop
+
+```{python}
+# Make a copy of the data 
+dataCopy = data.copy()
+
+# Remove NAs
+dataCopyFin = dataCopy.dropna()
+
+# Select only numerical columns
+dataRed = dataCopyFin.select_dtypes(include = np.number)
+
+# List of numerical columns
+dataRedColsList = dataRed.columns[...]
+
+# For all values in the numerical column list from above
+for i_col in dataRedColsList:
+  # List of the values in i_col
+  dataRed_i = dataRed.loc[:,i_col]
+  
+  # Normality test
+  stat, p = stats.shapiro(dataRed_i)
+  
+  # Print a blank, the column name, the statistic and p-value
+  print('')
+  print(i_col)
+  print('Statistic = %.3f, p = %.3f' % (stat, p))
+  
+  # Interpret
+  alpha = 0.05
+  
+  # Print the interpretation
+  if p > alpha:
+  	print('Sample looks Gaussian (fail to reject H0)')
+  else:
+	  print('Sample does not look Gaussian (reject H0)')
+```
+
+------------------------------------------------------------------------
+
+#### Q-Q Plots
+
+Plots of the quartiles of a target data set and plot it against predicted quartiles from a normal distribution.
+
+```{python}
+# Change theme to "white"
+sns.set_style("white")
+
+# Make a copy of the data 
+dataCopy = data.copy()
+
+# Remove NAs
+dataCopyFin = dataCopy.dropna()
+
+# Specify desired column
+i_col = dataCopyFin.Sap_Flow
+
+# Subplots
+fig, (ax1, ax2) = plt.subplots(ncols = 2, nrows = 1)
+
+# Density plot
+sns.kdeplot(i_col, linewidth = 5, ax = ax1)
+ax1.set_title('Sap_Flow Density plot')
+
+# Q-Q plot
+sm.qqplot(i_col, line='s', ax = ax2)
+ax2.set_title('Sap_Flow Q-Q plot')
+plt.tight_layout()
+plt.show()
+```
+
+You can also produce these plots for all numerical columns with a for-loop.
+
+```{python, eval = FALSE}
+# Change theme to "white"
+sns.set_style("white")
+
+# Make a copy of the data 
+dataCopy = data.copy()
+
+# Remove NAs
+dataCopyFin = dataCopy.dropna()
+
+# Select only numerical columns
+dataRed = dataCopyFin.select_dtypes(include = np.number)
+
+# Combine multiple plots, the number of columns and rows is derived from the number of numerical columns from above. 
+
+# Overall figure that subplots fill
+fig, axes = plt.subplots(ncols = 2, nrows = 4, sharex = True, figsize = (4, 4))
+
+# Fill the subplots
+for k, ax in zip(dataRed.columns, np.ravel(axes)):
+    # Subplots
+    fig, (ax1, ax2) = plt.subplots(ncols = 2, nrows = 1)
+    
+    # Density plot
+    sns.kdeplot(dataRed[k], linewidth = 5, ax = ax1)
+    ax1.set_title(f'{k} Density Plot')
+    
+    # Q-Q plot
+    sm.qqplot(dataRed[k], line='s', ax = ax2)
+    ax2.set_title(f'{k} QQ Plot')
+    plt.tight_layout()
+    plt.show()
+```
+
+------------------------------------------------------------------------
+
+### Normality within Groups {#sec-normality-within-groups}
+
+Looking within Age_group at the subgroup normality.
+
+#### Shapiro-Wilk Test
+
+```{python}
+# Make a copy of the data 
+dataCopy = data.copy()
+
+# Remove NAs
+dataCopyFin = dataCopy.dropna()
+
+# Pivot the data from long-to-wide with pivot, using Date as the index, so that a column is created for each Group and numerical column subset
+dataPivot = dataCopyFin.pivot(index = 'Date', columns = 'Group', values = ['Sap_Flow', 'TWaterFlux', 'pLWP', 'mLWP'])
+
+# Select only numerical columns
+dataRed = dataPivot.select_dtypes(include = np.number)
+
+# List of numerical columns
+dataRedColsList = dataRed.columns[...]
+
+# For all values in the numerical column list from above
+for i_col in dataRedColsList:
+  # List of the values in i_col
+  dataRed_i = dataRed.loc[:,i_col]
+  
+  # normality test
+  stat, p = stats.shapiro(dataRed_i)
+  
+  print('')
+  print(i_col)
+  print('Statistics = %.3f, p = %.3f' % (stat, p))
+  
+  # interpret
+  alpha = 0.05
+  
+  if p > alpha:
+  	print('Sample looks Gaussian (fail to reject H0)')
+  else:
+	  print('Sample does not look Gaussian (reject H0)')
+```
+
+------------------------------------------------------------------------
+
+#### Q-Q Plots
+
+```{python}
+# Make a copy of the data 
+dataCopy = data.copy()
+
+# Remove NAs
+dataCopyFin = dataCopy.dropna()
+
+# Pivot the data from long-to-wide with pivot, using Date as the index, so that a column is created for each Group and numerical column subset
+dataPivot = dataCopyFin.pivot(index = 'Date', columns = 'Group', values = ['Sap_Flow', 'TWaterFlux', 'pLWP', 'mLWP'])
+
+# Select only numerical columns
+dataRed = dataPivot.select_dtypes(include = np.number)
+
+# Combine multiple plots, the number of columns and rows is derived from the number of numerical columns from above. 
+fig, axes = plt.subplots(ncols = 2, nrows = 8, sharex = True, figsize = (2 * 4, 8 * 4))
+
+# Generate figures for all numerical grouped data subsets
+for k, ax in zip(dataRed.columns, np.ravel(axes)):
+    sm.qqplot(dataRed[k], line = 's', ax = ax)
+    ax.set_title(f'{k}\n QQ Plot')
+plt.tight_layout()
+plt.show()
+```
