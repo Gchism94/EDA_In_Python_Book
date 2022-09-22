@@ -55,6 +55,7 @@ import numpy as np
 import seaborn as sns
 # Matlab plotting for Python
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 # Data analysis
 import statistics as stat
 import scipy.stats as stats
@@ -318,7 +319,7 @@ print(Groups.to_string())
 
 Notably, there is only one categorical variable... Let's make another:
 
-If $mLWP > mean(mLWP) + sd(mLWP)$ then "Yes", else "No".
+If $mLWP > mean(mLWP) + sd(mLWP)$ then `Yes`, else `No`.
 
 ```{python}
 data1 = data.dropna()
@@ -362,4 +363,26 @@ if p > alpha:
   print('Chi-square value is not greater than critical value (fail to reject H0)')
 else:
 	print('Chi-square value is greater than critical value (reject H0)')
+```
+
+```{python}
+#| fig-align: center
+
+# Increase font and figure size of all seaborn plot elements
+sns.set(font_scale = 1.25)
+
+# Change seaborn plot theme to white
+sns.set_style("white")
+
+# Count plot of HighLWP grouped by Group 
+counts = sns.countplot(data = data1, x = "HighLWP", hue = "Group")
+
+# Tweak the visual presentation
+counts.set(ylabel = "Count")
+
+# Tight margins
+plt.tight_layout()
+
+# Show plot
+plt.show()
 ```
