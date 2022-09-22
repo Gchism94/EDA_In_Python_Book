@@ -15,6 +15,25 @@ span.underline{text-decoration: underline;}
 div.column{display: inline-block; vertical-align: top; width: 50%;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
 </style>
 
 
@@ -175,10 +194,11 @@ ul.task-list{list-style: none;}
 
 <div class="quarto-figure quarto-figure-left">
 <figure class="figure">
-<p><img src="https://pandas-profiling.ydata.ai/docs/assets/logo_header.png" class="img-fluid figure-img"></p>
+<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Pandas_logo.svg/2560px-Pandas_logo.svg.png" class="img-fluid figure-img"></p>
+<p></p><figcaption class="figure-caption"><span class="citation" data-cites="team2022">(<a href="#ref-team2022" role="doc-biblioref">Team 2022</a>)</span></figcaption><p></p>
 </figure>
 </div>
-<p><a href="https://en.wikipedia.org/wiki/Exploratory_data_analysis">Exploratory data analysis</a> is an essential first step towards determining the validity of your data and should be performed throughout the data pipeline. However, EDA is often performed too late or not at all. The Python programming language, is a widely used open source platform for <a href="https://en.wikipedia.org/wiki/Data_analysis">data analysis</a> and <a href="https://en.wikipedia.org/wiki/Data_and_information_visualization">data visualization</a>. This is because of the variety of libraries available and attentive community devoted to data analysis.</p>
+<p><a href="https://en.wikipedia.org/wiki/Exploratory_data_analysis">Exploratory data analysis</a> is an essential first step towards determining the validity of your data and should be performed throughout the data pipeline. However, EDA is often performed too late or not at all. The [Python programming language](https://en.wikipedia.org/wiki/Python_(programming_language), is a widely used open source platform for <a href="https://en.wikipedia.org/wiki/Data_analysis">data analysis</a> and <a href="https://en.wikipedia.org/wiki/Data_and_information_visualization">data visualization</a>. This is because of the variety of libraries available and attentive community devoted to data analysis.</p>
 <p>Here, we utilize the <a href="https://pandas.pydata.org/">pandas</a> and <a href="https://github.com/ydataai/pandas-profiling">pandas-profiling</a> libraries to conduct preliminary exploratory data analysis aimed at diagnosing any major issues with an imported data set. pandas and pandas-profiling offers a clean and straightforward methodology to uncover issues such as data <a href="https://en.wikipedia.org/wiki/Outlier">outliers</a>, <a href="https://en.wikipedia.org/wiki/Missing_data">missing data</a>, as well as summary statistical reports.</p>
 <section id="what-is-exploratory-data-analysis" class="level3">
 <h3 class="anchored" data-anchor-id="what-is-exploratory-data-analysis">What is Exploratory Data Analysis?</h3>
@@ -280,11 +300,11 @@ dtype: object</code></pre>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>   Pregnancies  Glucose  BloodPressure  ...  Outcome  Age_group  Outcome1
-0          6.0      NaN           72.0  ...      1.0     Middle       Yes
-1          1.0      NaN           66.0  ...      0.0     Middle        No
-2          8.0    183.0           64.0  ...      1.0     Middle       Yes
-3          1.0     89.0           66.0  ...      0.0      Young       NaN
-4          NaN    137.0            NaN  ...      1.0     Middle       NaN
+0          6.0    148.0           72.0  ...      1.0     Middle       Yes
+1          1.0     85.0           66.0  ...      NaN     Middle        No
+2          8.0    183.0           64.0  ...      NaN     Middle       Yes
+3          1.0     89.0           66.0  ...      NaN      Young        No
+4          0.0    137.0           40.0  ...      1.0     Middle       Yes
 
 [5 rows x 11 columns]</code></pre>
 </div>
@@ -329,10 +349,9 @@ dtype: object</code></pre>
 <li><p>Outliers: A value outside of <span class="math inline">\(1.5 * IQR\)</span></p></li>
 </ul>
 <div class="cell">
-<div class="cell-output-display">
-<p><img src="intro_files/figure-html/unnamed-chunk-12-16.png" class="img-fluid" width="1440"></p>
+
 </div>
-</div>
+<p><img src="DistBox.png" class="img-fluid"></p>
 </section>
 <section id="sec-distribution-shape" class="level3">
 <h3 class="anchored" data-anchor-id="sec-distribution-shape">Distribution Shape</h3>
@@ -343,7 +362,7 @@ dtype: object</code></pre>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="intro_files/figure-html/unnamed-chunk-13-18.png" class="img-fluid" width="1440"></p>
+<p><img src="intro_files/figure-html/unnamed-chunk-13-16.png" class="img-fluid" width="1440"></p>
 </div>
 </div>
 </section>
@@ -355,11 +374,16 @@ dtype: object</code></pre>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="intro_files/figure-html/unnamed-chunk-14-20.png" class="img-fluid" width="864"></p>
+<p><img src="intro_files/figure-html/unnamed-chunk-14-18.png" class="img-fluid" width="864"></p>
 </div>
 </div>
 
 
+<div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
+<div id="ref-team2022" class="csl-entry" role="doc-biblioentry">
+Team, The Pandas Development. 2022. <em>Pandas-Dev/Pandas: Pandas</em>. Zenodo. <a href="https://doi.org/10.5281/ZENODO.7093122">https://doi.org/10.5281/ZENODO.7093122</a>.
+</div>
+</div>
 </section>
 </section>
 

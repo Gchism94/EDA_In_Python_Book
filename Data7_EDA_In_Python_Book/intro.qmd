@@ -133,7 +133,7 @@ data['Outcome1'] = data.apply(Outcome_data, axis = 1)
 
 sns.set_style("white")
 
-sns.stripplot(data = data, x = "Outcome1", y = "BMI", alpha = 0.5, hue = "Outcome1", legend = False, s = 15)
+sns.stripplot(data = data, x = "Outcome1", y = "BMI", alpha = 0.5, hue = "Outcome1", s = 15)
 ```
 
 #### **Categorical: Ordinal**
@@ -143,7 +143,7 @@ Where there is a hierarchical order along a scale (e.g., ranks, letter grades, a
 ```{python}
 sns.set_style("white")
 
-AgeStrip = sns.stripplot(data = data, x = "Age_group", y = "BMI", alpha = 0.5, hue = "Age_group", legend = False, s = 15)
+AgeStrip = sns.stripplot(data = data, x = "Age_group", y = "BMI", alpha = 0.5, hue = "Age_group", s = 15)
 
 AgeStrip.set(xlabel = 'Age group', ylabel = 'BMI')
 ```
@@ -223,7 +223,7 @@ Measure of data variability, scatter, or spread. Some examples you may have hear
 
 -   Outliers: A value outside of $1.5 * IQR$
 
-```{python}
+```{python, eval = FALSE}
 
 q3, q1 = np.percentile(data.BMI, [75 ,25])
 
@@ -279,6 +279,8 @@ hist1.text(66.8, 50, "Outlier", horizontalalignment = 'center', size = 'medium',
 hist1.plot([67.1, 67.1], [47, 48.5], linewidth = 3, color = 'black')
 
 ```
+
+![](DistBox.png)
 
 ### Distribution Shape {#sec-distribution-shape}
 
