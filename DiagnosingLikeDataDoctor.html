@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data7 Exploratory Data Analysis In Python Book - Exploratory Data Analysis in Python - Diagnosing like a Data Doctor</title>
+<title>Data7 Exploratory Data Analysis In Python Book - Diagnosing like a Data Doctor</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -148,7 +148,7 @@ div.csl-indent {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Exploratory Data Analysis in Python - Diagnosing like a Data Doctor</h1>
+      <h1 class="quarto-secondary-nav-title">Diagnosing like a Data Doctor</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -186,27 +186,27 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./DiagnosingLikeDataDoctor.html" class="sidebar-item-text sidebar-link active">Exploratory Data Analysis in Python - Diagnosing like a Data Doctor</a>
+  <a href="./DiagnosingLikeDataDoctor.html" class="sidebar-item-text sidebar-link active">Diagnosing like a Data Doctor</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ExploringLikeDataAdventurer.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Exploring like a Data Adventurer</a>
+  <a href="./ExploringLikeDataAdventurer.html" class="sidebar-item-text sidebar-link">Exploring like a Data Adventurer</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./TransformingLikeDataTrans.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Transforming like a Data… Transformer</a>
+  <a href="./TransformingLikeDataTrans.html" class="sidebar-item-text sidebar-link">Transforming like a Data… Transformer</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ImputingLikeDataScientist.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Imputing like a Data Scientist</a>
+  <a href="./ImputingLikeDataScientist.html" class="sidebar-item-text sidebar-link">Imputing like a Data Scientist</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./CorrelateLikeDataMaster.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Correlate Like a Data Master</a>
+  <a href="./CorrelateLikeDataMaster.html" class="sidebar-item-text sidebar-link">Correlate Like a Data Master</a>
   </div>
 </li>
     </ul>
@@ -218,8 +218,8 @@ div.csl-indent {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#purpose-of-materials" id="toc-purpose-of-materials" class="nav-link active" data-scroll-target="#purpose-of-materials">Purpose of Materials</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#purpose-of-this-chapter" id="toc-purpose-of-this-chapter" class="nav-link active" data-scroll-target="#purpose-of-this-chapter">Purpose of this chapter</a></li>
+  <li><a href="#take-aways" id="toc-take-aways" class="nav-link" data-scroll-target="#take-aways">Take-aways</a></li>
   <li><a href="#required-setup" id="toc-required-setup" class="nav-link" data-scroll-target="#required-setup">Required Setup</a></li>
   <li><a href="#load-and-examine-a-data-set" id="toc-load-and-examine-a-data-set" class="nav-link" data-scroll-target="#load-and-examine-a-data-set">Load and Examine a Data Set</a></li>
   <li><a href="#diagnose-your-data" id="toc-diagnose-your-data" class="nav-link" data-scroll-target="#diagnose-your-data">Diagnose your Data</a></li>
@@ -239,7 +239,7 @@ div.csl-indent {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Exploratory Data Analysis in Python - Diagnosing like a Data Doctor</h1>
+<h1 class="title d-none d-lg-block">Diagnosing like a Data Doctor</h1>
 </div>
 
 
@@ -253,13 +253,13 @@ div.csl-indent {
 
 </header>
 
-<section id="purpose-of-materials" class="level2">
-<h2 class="anchored" data-anchor-id="purpose-of-materials">Purpose of Materials</h2>
+<section id="purpose-of-this-chapter" class="level2">
+<h2 class="anchored" data-anchor-id="purpose-of-this-chapter">Purpose of this chapter</h2>
 <p><strong>Exploring a novel data set and produce an HTML interactive reports</strong></p>
 <hr>
 </section>
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<section id="take-aways" class="level2">
+<h2 class="anchored" data-anchor-id="take-aways">Take-aways</h2>
 <ol type="1">
 <li>Load and explore a data set with publication quality tables</li>
 <li>Diagnose outliers and missing values in a data set</li>
@@ -462,7 +462,7 @@ Number of Outliers:  1721</code></pre>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplot of all numerical variables</span></span>
 <span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data <span class="op">=</span> data_melted, x <span class="op">=</span> <span class="st">'variable'</span>, y <span class="op">=</span> <span class="st">'value'</span>, hue <span class="op">=</span> <span class="st">'variable'</span> , width <span class="op">=</span> <span class="fl">0.20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="DiagnosingLikeDataDoctor_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid" width="672"></p>
+<p><img src="DiagnosingLikeDataDoctor_files/figure-html/boxplot-outliers-1.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>Note the extreme number of outliers represented in the boxplot</p>
@@ -481,7 +481,7 @@ Number of Outliers:  1721</code></pre>
 <span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Boxplot of all numerical variables, with outliers removed via the IQR cutoff criteria</span></span>
 <span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>sns.boxplot(data <span class="op">=</span> data_clean_melted, x <span class="op">=</span> <span class="st">'variable'</span>, y <span class="op">=</span> <span class="st">'value'</span>, hue <span class="op">=</span> <span class="st">'variable'</span> , width <span class="op">=</span> <span class="fl">0.20</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="DiagnosingLikeDataDoctor_files/figure-html/unnamed-chunk-7-3.png" class="img-fluid" width="672"></p>
+<p><img src="DiagnosingLikeDataDoctor_files/figure-html/boxplot-no-outliers-3.png" class="img-fluid" width="672"></p>
 </div>
 </div>
 <p>But the distribution changes dramatically when we remove outliers with the IQR method (see above). Interestingly, there are a new set of “outliers” which results from a new IQR being calculated.</p>
@@ -514,10 +514,8 @@ dtype: int64</code></pre>
 <p>Bar plot showing all NA values in each column. Since we randomly produced a set amount above the numbers will all be the same.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Bar plot showing the number of NAs in each column</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>msno.bar(dataNA, figsize <span class="op">=</span> (<span class="dv">8</span>, <span class="dv">8</span>), fontsize <span class="op">=</span> <span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output-display">
-<p><img src="DiagnosingLikeDataDoctor_files/figure-html/unnamed-chunk-9-5.png" class="img-fluid" width="768"></p>
-</div>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>msno.bar(dataNA, figsize <span class="op">=</span> (<span class="dv">8</span>, <span class="dv">8</span>), fontsize <span class="op">=</span> <span class="dv">10</span>)</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 </section>
@@ -530,8 +528,8 @@ dtype: int64</code></pre>
 <pre><code>       result_date      affil_category  ... test_result          test_source
 count         8262                8262  ...        8262                 8262
 unique         541                   4  ...           3                    2
-top     2020-12-09  Off-Campus Student  ...    Negative  Test All Test Smart
-freq            25                3044  ...        4121                 4570
+top     2020-10-01  Off-Campus Student  ...    Positive  Test All Test Smart
+freq            26                3029  ...        4133                 4552
 
 [4 rows x 5 columns]</code></pre>
 </div>
@@ -549,7 +547,7 @@ freq            25                3044  ...        4121                 4570
 <h2 class="anchored" data-anchor-id="produce-an-html-summary-of-a-data-set">Produce an HTML Summary of a Data Set</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Producing a pandas-profiling report </span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># profile = ProfileReport(data, title = "Pandas Profiling Report")</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>profile <span class="op">=</span> ProfileReport(data, title <span class="op">=</span> <span class="st">"Pandas Profiling Report"</span>)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># HTML output</span></span>
 <span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>profile.to_widgets()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -669,7 +667,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./ExploringLikeDataAdventurer.html" class="pagination-link">
-        <span class="nav-page-text">Exploratory Data Analysis in Python - Exploring like a Data Adventurer</span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text">Exploring like a Data Adventurer</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

@@ -123,27 +123,27 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./DiagnosingLikeDataDoctor.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Diagnosing like a Data Doctor</a>
+  <a href="./DiagnosingLikeDataDoctor.html" class="sidebar-item-text sidebar-link">Diagnosing like a Data Doctor</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ExploringLikeDataAdventurer.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Exploring like a Data Adventurer</a>
+  <a href="./ExploringLikeDataAdventurer.html" class="sidebar-item-text sidebar-link">Exploring like a Data Adventurer</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./TransformingLikeDataTrans.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Transforming like a Data… Transformer</a>
+  <a href="./TransformingLikeDataTrans.html" class="sidebar-item-text sidebar-link">Transforming like a Data… Transformer</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ImputingLikeDataScientist.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Imputing like a Data Scientist</a>
+  <a href="./ImputingLikeDataScientist.html" class="sidebar-item-text sidebar-link">Imputing like a Data Scientist</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./CorrelateLikeDataMaster.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Correlate Like a Data Master</a>
+  <a href="./CorrelateLikeDataMaster.html" class="sidebar-item-text sidebar-link">Correlate Like a Data Master</a>
   </div>
 </li>
     </ul>
@@ -156,7 +156,7 @@ div.csl-indent {
    
   <ul>
   <li><a href="#what-is-exploratory-data-analysis" id="toc-what-is-exploratory-data-analysis" class="nav-link active" data-scroll-target="#what-is-exploratory-data-analysis">What is Exploratory Data Analysis?</a></li>
-  <li><a href="#what-are-some-important-data-set-characteristics" id="toc-what-are-some-important-data-set-characteristics" class="nav-link" data-scroll-target="#what-are-some-important-data-set-characteristics"><strong>What are Some Important Data Set Characteristics?</strong></a></li>
+  <li><a href="#what-are-some-important-data-set-characteristics" id="toc-what-are-some-important-data-set-characteristics" class="nav-link" data-scroll-target="#what-are-some-important-data-set-characteristics">What are Some Important Data Set Characteristics?</a></li>
   <li><a href="#diagnostics" id="toc-diagnostics" class="nav-link" data-scroll-target="#diagnostics">Diagnostics</a>
   <ul class="collapse">
   <li><a href="#variables" id="toc-variables" class="nav-link" data-scroll-target="#variables">Variables</a></li>
@@ -200,18 +200,18 @@ div.csl-indent {
 </div>
 <p><a href="https://en.wikipedia.org/wiki/Exploratory_data_analysis">Exploratory data analysis</a> is an essential first step towards determining the validity of your data and should be performed throughout the data pipeline. However, EDA is often performed too late or not at all. The [Python programming language](https://en.wikipedia.org/wiki/Python_(programming_language), is a widely used open source platform for <a href="https://en.wikipedia.org/wiki/Data_analysis">data analysis</a> and <a href="https://en.wikipedia.org/wiki/Data_and_information_visualization">data visualization</a>. This is because of the variety of libraries available and attentive community devoted to data analysis.</p>
 <p>Here, we utilize the <a href="https://pandas.pydata.org/">pandas</a> and <a href="https://github.com/ydataai/pandas-profiling">pandas-profiling</a> libraries to conduct preliminary exploratory data analysis aimed at diagnosing any major issues with an imported data set. pandas and pandas-profiling offers a clean and straightforward methodology to uncover issues such as data <a href="https://en.wikipedia.org/wiki/Outlier">outliers</a>, <a href="https://en.wikipedia.org/wiki/Missing_data">missing data</a>, as well as summary statistical reports.</p>
-<section id="what-is-exploratory-data-analysis" class="level3">
-<h3 class="anchored" data-anchor-id="what-is-exploratory-data-analysis">What is Exploratory Data Analysis?</h3>
+<section id="what-is-exploratory-data-analysis" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-exploratory-data-analysis">What is Exploratory Data Analysis?</h2>
 <p>Exploratory data analysis is a <a href="https://en.wikipedia.org/wiki/Statistics">statistical</a>, approach towards analyzing <a href="https://en.wikipedia.org/wiki/Data_set">data sets</a> to investigate and summarize their main characteristics, often through <a href="https://en.wikipedia.org/wiki/Statistical_graphics">statistical graphics</a> and other data visualization methods.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="intro_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid" width="1440"></p>
+<p><img src="intro_files/figure-html/req-setup-EDAplot-1.png" class="img-fluid" width="1440"></p>
 </div>
 </div>
 <hr>
 </section>
 <section id="what-are-some-important-data-set-characteristics" class="level2">
-<h2 class="anchored" data-anchor-id="what-are-some-important-data-set-characteristics"><strong>What are Some Important Data Set Characteristics?</strong></h2>
+<h2 class="anchored" data-anchor-id="what-are-some-important-data-set-characteristics">What are Some Important Data Set Characteristics?</h2>
 <p>There are several characteristics that are arguably important, but we will only consider those covered in this workshop series. Let’s start with the fundamentals that will help guide us.</p>
 </section>
 <section id="diagnostics" class="level2">
@@ -257,7 +257,7 @@ dtype: object</code></pre>
 <p>Measurable numbers that are fractional or decimal and cannot be counted (e.g., time, height, weight)</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="intro_files/figure-html/unnamed-chunk-4-3.png" class="img-fluid" width="1440"></p>
+<p><img src="intro_files/figure-html/plot-continuous-3.png" class="img-fluid" width="1440"></p>
 </div>
 </div>
 </section>
@@ -266,7 +266,7 @@ dtype: object</code></pre>
 <p>Countable whole numbers or integers (e.g., number of successes or failures)</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="intro_files/figure-html/unnamed-chunk-5-5.png" class="img-fluid" width="1440"></p>
+<p><img src="intro_files/figure-html/plot-discrete-5.png" class="img-fluid" width="1440"></p>
 </div>
 </div>
 <hr>
@@ -276,7 +276,7 @@ dtype: object</code></pre>
 <p>Labeling variables without any order or quantitative value (e.g., hair color, nationality)</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="intro_files/figure-html/unnamed-chunk-6-7.png" class="img-fluid" width="1440"></p>
+<p><img src="intro_files/figure-html/plot-nominal-7.png" class="img-fluid" width="1440"></p>
 </div>
 </div>
 </section>
@@ -285,7 +285,7 @@ dtype: object</code></pre>
 <p>Where there is a hierarchical order along a scale (e.g., ranks, letter grades, age groups)</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="intro_files/figure-html/unnamed-chunk-7-9.png" class="img-fluid" width="1440"></p>
+<p><img src="intro_files/figure-html/plot-ordinal-9.png" class="img-fluid" width="1440"></p>
 </div>
 </div>
 </section>
@@ -302,9 +302,9 @@ dtype: object</code></pre>
 <pre><code>   Pregnancies  Glucose  BloodPressure  ...  Outcome  Age_group  Outcome1
 0          6.0    148.0           72.0  ...      1.0     Middle       Yes
 1          1.0     85.0           66.0  ...      0.0     Middle        No
-2          NaN    183.0           64.0  ...      1.0        NaN       NaN
-3          NaN     89.0           66.0  ...      0.0        NaN        No
-4          0.0    137.0           40.0  ...      1.0     Middle       Yes
+2          8.0    183.0           64.0  ...      NaN     Middle       Yes
+3          1.0     89.0           66.0  ...      NaN        NaN        No
+4          0.0    137.0           40.0  ...      NaN     Middle       Yes
 
 [5 rows x 11 columns]</code></pre>
 </div>
@@ -326,13 +326,13 @@ dtype: object</code></pre>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="intro_files/figure-html/unnamed-chunk-9-11.png" class="img-fluid" width="1440"></p>
+<p><img src="intro_files/figure-html/cent-tend-11.png" class="img-fluid" width="1440"></p>
 </div>
 </div>
 <p>Notice that all values of central tendency can be pretty similar in this figure.</p>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="intro_files/figure-html/unnamed-chunk-10-13.png" class="img-fluid" width="1440"></p>
+<p><img src="intro_files/figure-html/norm-plot-13.png" class="img-fluid" width="1440"></p>
 </div>
 </div>
 <p>However, in this figure, all measures are different. This will be important when we discuss statistical dispersion in chapter 3.</p>
@@ -362,7 +362,7 @@ dtype: object</code></pre>
 </ul>
 <div class="cell">
 <div class="cell-output-display">
-<p><img src="intro_files/figure-html/unnamed-chunk-13-16.png" class="img-fluid" width="1440"></p>
+<p><img src="intro_files/figure-html/dist-shape-16.png" class="img-fluid" width="1440"></p>
 </div>
 </div>
 </section>
@@ -373,8 +373,11 @@ dtype: object</code></pre>
 <li>Numerical values, but you can compare numericals across categories (see the first plot above).</li>
 </ul>
 <div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;string&gt;:1: FutureWarning: The default value of numeric_only in DataFrame.corr is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.</code></pre>
+</div>
 <div class="cell-output-display">
-<p><img src="intro_files/figure-html/unnamed-chunk-14-18.png" class="img-fluid" width="864"></p>
+<p><img src="intro_files/figure-html/correlation-18.png" class="img-fluid" width="864"></p>
 </div>
 </div>
 
@@ -493,7 +496,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   </div>
   <div class="nav-page nav-page-next">
       <a href="./DiagnosingLikeDataDoctor.html" class="pagination-link">
-        <span class="nav-page-text">Exploratory Data Analysis in Python - Diagnosing like a Data Doctor</span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text">Diagnosing like a Data Doctor</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
