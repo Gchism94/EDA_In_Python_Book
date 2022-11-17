@@ -1,4 +1,4 @@
-# Exploratory Data Analysis in Python - Imputing like a Data Scientist {.unnumbered}
+# Imputing like a Data Scientist {.unnumbered}
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
@@ -23,13 +23,15 @@ py_install("statsmodels")
 py_install("mlxtend")
 ```
 
-## Purpose of Workshop
+## Purpose of this chapter
 
 **Exploring, visualizing, and imputing outliers and missing values (NAs) in a novel data set**
 
+**IMPORTANT NOTE**: imputation should only be used when missing data is unavoidable and probably limited to 10% of your data being outliers / missing data (though some argue imputation is necessary between 30-60%). Ask what the cause is for the outlier and missing data.
+
 ------------------------------------------------------------------------
 
-## Objectives
+## Take-aways
 
 1.  Load and explore a data set with publication quality tables
 2.  Thoroughly diagnose outliers and missing values
@@ -41,7 +43,7 @@ py_install("mlxtend")
 
 We first need to prepare our environment with the necessary libraries and set a global theme for publishable plots in `seaborn`.
 
-```{python, echo = TRUE}
+```{python req-setup, echo = TRUE}
 # Import all required libraries
 # Data analysis and manipulation
 import pandas as pd
@@ -74,7 +76,6 @@ from sklearn import neighbors
 # Predictive data analysis: Plotting decision regions
 from mlxtend.plotting import plot_decision_regions
 
-
 # Increase font size of all seaborn plot elements
 sns.set(font_scale = 1.5, rc = {'figure.figsize':(8, 8)})
 
@@ -86,7 +87,7 @@ sns.set_style("white")
 
 ## Load and Examine a Data Set
 
-```{python}
+```{python load-data}
 # Read csv 
 data = pd.read_csv("data/diabetes.csv")
 
@@ -107,7 +108,7 @@ data.head()
 
 ## Diagnose your Data
 
-```{python}
+```{python data-info}
 # What are the properties of the data
 diagnose = data.info()
 ```
@@ -126,7 +127,7 @@ There are several numerical variables that have outliers above, let's see what t
 
 -   Plot outliers in a box plot and histogram
 
-```{python}
+```{python outliers-test}
 # Make a copy of the data 
 dataCopy = data.copy()
 
@@ -174,15 +175,15 @@ for i_col in dataRedColsList:
 
 -   `lower`: lower limit of $1.5*IQR$ used to calculate outliers
 
--   
+-   `upper`: upper limit of $1.5*IQR$ used to calculate outliers
 
-    ## `upper`: upper limit of $1.5*IQR$ used to calculate outliers
+------------------------------------------------------------------------
 
 ## Basic Exploration of Missing Values (NAs)
 
 -   Table showing the extent of NAs in columns containing them
 
-```{python}
+```{python NA-table}
 dataNA = data
 
 for col in dataNA.columns:
@@ -193,7 +194,7 @@ dataNA.isnull().sum()
 
 Bar plot showing all NA values in each column. Since we randomly produced a set amount above the numbers will all be the same.
 
-```{python}
+```{python NA-barplot}
 msno.bar(dataNA, figsize = (8, 8), fontsize = 10)
 plt.tight_layout()
 ```
@@ -210,7 +211,7 @@ This matrix shows the number of missing values throughout each column.
 
 -   Right Y-axis is a line plot that shows each row's completeness, e.g., if there are 11 columns, 4-10 valid values means that there are 1-7 missing values in a row.
 
-```{python}
+```{python NA-matrix}
 #| fig-align: center
 dataNA1 = dataNA.drop('DiabetesPedigreeFunction', axis = "columns")
 
@@ -228,25 +229,21 @@ The principle goal for all imputation is to find the method that does not change
 
 ------------------------------------------------------------------------
 
-**NOTE: imputation should only be used when missing data is unavoidable and probably limited to 10% of your data being outliers / missing data (though some argue imputation is necessary between 30-60%). Ask what the cause is for the outlier and missing data.**
-
-------------------------------------------------------------------------
-
 ### Classifying Outliers
 
 Before imputing outliers, you will want to diagnose whether it's they are natural outliers or not. We will be looking at "Insulin" for example across Age_group, because there are several outliers and NAs, which we will impute below.
 
-```{python}
+```{python boxplot-outliers}
 #| fig-align: right
 
 # Increase font size of all seaborn plot elements
-sns.set(font_scale = 1.5, rc = {'figure.figsize':(8, 8)})
+sns.set(font_scale = 1.25, rc = {'figure.figsize':(6, 8)})
 
 # Change theme to "white"
 sns.set_style("white")
 
 # Box plot
-Age_Box = sns.boxplot(data = data, x = "Insulin", y = "Age_group", width = .3)
+Age_Box = sns.boxplot(data = data, x = "Insulin", y = "Age_group", width = 0.3)
 
 # Tweak the visual presentation
 Age_Box.set(ylabel = "Age group")
@@ -256,15 +253,12 @@ Now let's say that we want to impute extreme values and remove outliers that don
 
 We remove outliers using `SimpleImputer` from `sklearn` and replace them with values that are estimates based on the existing data
 
--   mean: arithmetic mean
+1.  **Mean**: arithmetic mean
+2.  **Median**: median
+3.  **Mode**: mode
+4.  **Capping**: Impute the upper outliers with 95 percentile, and impute the bottom outliers with 5 percentile - aka Winsorizing
 
--   median: median
-
--   mode: mode
-
--   capping: Impute the upper outliers with 95 percentile, and impute the bottom outliers with 5 percentile - aka Winsorizing
-
-```{python}
+```{python ins-subset}
 # Select only Insulin
 InsMod = data.filter(["Insulin"], axis = "columns")
 ```
@@ -275,7 +269,7 @@ InsMod = data.filter(["Insulin"], axis = "columns")
 
 The mean of the observed values for each variable is computed and the outliers for that variable are imputed by this mean
 
-```{python}
+```{python mean-imp-ins}
 # Python can't impute outliers easily, so we will convert them to NAs and imputate them
 InsMod.loc[InsMod.Insulin > 600, 'Insulin'] = np.nan
 
@@ -289,7 +283,7 @@ Mean_Impute = Mean_Impute.fit(InsMod[['Insulin']])
 InsMod['Ins_Mean'] = Mean_Impute.transform(InsMod[['Insulin']])
 ```
 
-```{python}
+```{python mean-imp-ins-plot}
 # Visualization of the mean imputation
 # Original data
 mean_plot = sns.kdeplot(data = InsMod, x = 'Insulin', linewidth = 2, label = "Original")
@@ -310,7 +304,7 @@ plt.show()
 
 The median of the observed values for each variable is computed and the outliers for that variable are imputed by this median
 
-```{python}
+```{python med-imp-ins}
 # Python can't impute outliers easily, so we will convert them to NAs and imputate them
 InsMod.loc[InsMod.Insulin > 600, 'Insulin'] = np.nan
 
@@ -324,7 +318,7 @@ Median_Impute = Median_Impute.fit(InsMod[['Insulin']])
 InsMod['Ins_Median'] = Median_Impute.transform(InsMod[['Insulin']])
 ```
 
-```{python}
+```{python med-imp-ins-plot}
 # Visualization of the median imputation
 # Original data
 median_plot = sns.kdeplot(data = InsMod, x = 'Insulin', linewidth = 2, label = "Original")
@@ -361,7 +355,7 @@ plt.show()
 
 The mode of the observed values for each variable is computed and the outliers for that variable are imputed by this mode
 
-```{python}
+```{python mode-imp-ins}
 # Python can't impute outliers easily, so we will convert them to NAs and imputate them
 InsMod.loc[InsMod.Insulin > 600, 'Insulin'] = np.nan
 
@@ -375,7 +369,7 @@ Mode_Impute = Mode_Impute.fit(InsMod[['Insulin']])
 InsMod['Ins_Mode'] = Mode_Impute.transform(InsMod[['Insulin']])
 ```
 
-```{python}
+```{python mode-imp-ins-plot}
 # Visualization of the mode imputation
 # Original data
 mode_plot = sns.kdeplot(data = InsMod, x = 'Insulin', linewidth = 2, label = "Original")
@@ -410,14 +404,14 @@ plt.show()
 
 The Percentile Capping is a method of Imputing the outlier values by replacing those observations outside the lower limit with the value of 5th percentile and those that lie above the upper limit, with the value of 95th percentile of the same dataset.
 
-```{python}
+```{python cap-imp-ins}
 # Winsorizing deals specifically with outliers, so we don't have to worry about changing outliers to NAs
 
 # New column for capping imputated data at the lowest and highest 10% of values
 InsMod['Ins_Cap'] = pd.DataFrame(stats.mstats.winsorize(InsMod['Insulin'], limits = [0.05, 0.05]))
 ```
 
-```{python, eval = FALSE}
+```{python cap-imp-ins-plot, eval = FALSE}
 # Visualization of the capping imputation
 # Original data
 cap_plot = sns.kdeplot(data = InsMod, x = 'Insulin', linewidth = 2, label = "Original")
@@ -452,12 +446,12 @@ plt.show()
 
 I will only be addressing a subset of methods for NA imputation, but you can use the mean, median, and mode methods from above as well:
 
-1.  KNN: K-nearest neighbors
-2.  MICE: Multivariate Imputation by Chained Equations
+1.  **KNN**: K-nearest neighbors
+2.  **MICE**: Multivariate Imputation by Chained Equations
 
 Since our normal `data` has no NA values, we will add the `Insulin` column from the `dataNA` we created earlier and replace the original with it.
 
-```{python}
+```{python NA-ins-subset}
 # Make a copy of the data 
 dataCopy = data.copy()
 
@@ -476,7 +470,7 @@ KNN is a machine learning algorithm that classifies data by similarity. This in 
 
 Here's a visual example using the `plot_decision_regions` function from `mlxtend.plotting` library to run a KNN algorithm on our `dataset`, where three clusters are created by the algorithm.
 
-```{python}
+```{python KNN-ex-plot-funct}
 # KNN plot function
 def knn_comparision(data, k):
   # Define x and y values (your data will need to have these)
@@ -499,7 +493,7 @@ def knn_comparision(data, k):
     plt.show()
 ```
 
-```{python}
+```{python knn-ex-plot-prep}
 # Prepare data for the KNN plotting function
 data1 = data.loc[:, ['Insulin', 'Glucose', 'Outcome']]
 
@@ -515,7 +509,7 @@ knn_comparision(data1, 3)
 
 You can also loop the KNN plots for i nearest neighbors:
 
-```{python, eval = FALSE}
+```{python knn-ex-plot, eval = FALSE}
 # Loop to create KNN plots for i number of nearest neighbors
 for i in [1, 5, 15]:
   knn_comparision(data1, i)
@@ -525,7 +519,7 @@ for i in [1, 5, 15]:
 
 1.  We need to change any characters, into dummy variables that are numericals, because scalars and imputers do not recognize characters. In this case, `Age_group` is an ordinal category, so we will use `OrdinalEncoder` from `Scikit-learn`, specifically in `preprocessing` which we imported as `pproc`.
 
-```{python}
+```{python knn-imp-prep}
 # Numeric dummy variable from our Age_group ordinal column
 # Define the orginal encoder 
 enc = pproc.OrdinalEncoder()
@@ -536,14 +530,14 @@ dataCopy[['Age_group']] = enc.fit_transform(dataCopy[['Age_group']])
 
 2.  We need to reorder our target column with NAs to the end of the dataframe so that the rest of the dataframe can be called as training data more easily.
 
-```{python}
+```{python reorder-data}
 # Reorder columns
 dataCopy = dataCopy[['Pregnancies', 'Glucose', 'BloodPressure', 'SkinThickness', "BMI", "DiabetesPedigreeFunction", "Age", "Outcome", "Age_group", "Insulin"]]
 ```
 
 3.  `KNNImputater` is distance-based so we need to normalize our data. Otherwise `KNNImputer` will create biased replacement. We will use the `pproc.MinMaxScaler` from `Scikit-learn`, which scales our values from 0-1.
 
-```{python}
+```{python normalize-data}
 # Min-max schaler
 scaler = pproc.MinMaxScaler()
 
@@ -553,7 +547,7 @@ dataCopy_Scale = pd.DataFrame(scaler.fit_transform(dataCopy), columns = dataCopy
 
 We are finally ready to for KNN Imputation!
 
-```{python}
+```{python knn-imp}
 # Set KNN imputation function parameters
 imputer = KNNImputer(n_neighbors = 3)
 
@@ -561,7 +555,7 @@ imputer = KNNImputer(n_neighbors = 3)
 DataKnn = pd.DataFrame(imputer.fit_transform(dataCopy_Scale),columns = dataCopy_Scale.columns)
 ```
 
-```{python}
+```{python knn-imp-plot}
 # Add KNN imputated column to original dataCopy
 dataCopy_Scale[['InsKnn']] = DataKnn[['Insulin']]
 
@@ -601,7 +595,7 @@ MICE is an algorithm that fills missing values multiple times, hence dealing wit
 
 ![Image Credit: [Will Badr](https://towardsdatascience.com/6-different-ways-to-compensate-for-missing-values-data-imputation-with-examples-6022d9ca0779)](https://miro.medium.com/max/1400/1*cmZFWypJUrFL2QL3KyzXEQ.png)
 
-```{python, output = FALSE}
+```{python MICE-imp, output = FALSE}
 # Assign a regression model
 lm = LinearRegression()
 
@@ -612,16 +606,16 @@ imputer = IterativeImputer(estimator = lm, missing_values = np.nan, max_iter = 1
 dataMice = pd.DataFrame(imputer.fit_transform(dataCopy),columns = dataCopy.columns)
 ```
 
-```{python}
+```{python MICE-imp-plot}
 # Add MICE imputated column to original dataCopy
 dataCopy[['InsMice']] = dataMice[['Insulin']]
 
 # Visualization of the MICE imputation
 # Original data
-knn_plot = sns.kdeplot(data = dataCopy, x = 'Insulin', linewidth = 2, label = "Original")
+mice_plot = sns.kdeplot(data = dataCopy, x = 'Insulin', linewidth = 2, label = "Original")
 
-# KNN imputation
-knn_plot = sns.kdeplot(data = dataCopy, x = 'InsMice', linewidth = 2, label = "MICE Imputated")
+# MICE imputation
+mice_plot = sns.kdeplot(data = dataCopy, x = 'InsMice', linewidth = 2, label = "MICE Imputated")
 
 # Show legend
 plt.legend()

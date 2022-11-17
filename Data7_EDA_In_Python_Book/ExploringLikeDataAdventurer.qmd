@@ -1,4 +1,4 @@
-# Exploratory Data Analysis in Python - Exploring like a Data Adventurer {.unnumbered}
+# Exploring like a Data Adventurer {.unnumbered}
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE) 
@@ -22,13 +22,13 @@ py_install("missingno")
 py_install("statsmodels")
 ```
 
-## Purpose of Materials
+## Purpose of this chapter
 
 **Exploring the normality of numerical columns in a novel data set**
 
 ------------------------------------------------------------------------
 
-## Objectives
+## Take-aways
 
 1.  Using summary statistics to better understand individual columns in a data set.
 2.  Assessing data normality in numerical columns.
@@ -40,7 +40,7 @@ py_install("statsmodels")
 
 We first need to prepare our environment with the necessary libraries and set a global theme for publishable plots in seaborn.
 
-```{python, echo = TRUE}
+```{python req-setup, echo = TRUE}
 # Import all required libraries
 # Data analysis and manipulation
 import pandas as pd
@@ -70,7 +70,7 @@ sns.set(font_scale = 1.25)
 
 We will be using open source data from UArizona researchers that investigates the effects of climate change on canopy trees. [@meredith2021]
 
-```{python}
+```{python load-data}
 # Read csv 
 data = pd.read_csv("data/Data_Fig2_Repo.csv")
 
@@ -82,7 +82,7 @@ data.head()
 
 ## Diagnose your Data
 
-```{python}
+```{python data-info}
 # What are the properties of the data
 diagnose = data.info()
 ```
@@ -130,7 +130,7 @@ diagnose = data.info()
 
 ## Describe your Continuous Data
 
-```{python}
+```{python summ-stats-cont}
 # Summary statistics of our numerical columns
 data.describe()
 ```
@@ -151,7 +151,7 @@ data.describe()
 
 -   `max`: maximum value
 
-```{python}
+```{python outliers-test}
 # Make a copy of the data 
 dataCopy = data.copy()
 
@@ -219,7 +219,7 @@ for i_col in dataRedColsList:
 
 ## Describe Categorical Variables
 
-```{python}
+```{python describe-cat}
 # Select only categorical columns (objects) 
 data.describe(exclude=[np.number]) 
 ```
@@ -228,7 +228,7 @@ data.describe(exclude=[np.number])
 
 ### Group Descriptive Statistics
 
-```{python}
+```{python group-summ-stats}
 # Grouped describe by one column, stacked 
 Groups = data.groupby('Group').describe().unstack(1)
 
@@ -254,7 +254,7 @@ print(Groups.to_string())
 
 Shapiro-Wilk test looks at whether a target distribution is sample form a normal distribution
 
-```{python}
+```{python norm-test}
 # Make a copy of the data 
 dataCopy = data.copy()
 
@@ -284,7 +284,7 @@ else:
 
 You can also run the Shapiro-Wilk test on all numerical columns with a for-loop
 
-```{python}
+```{python norm-test-all}
 # Make a copy of the data 
 dataCopy = data.copy()
 
@@ -326,7 +326,7 @@ for i_col in dataRedColsList:
 
 Plots of the quartiles of a target data set and plot it against predicted quartiles from a normal distribution.
 
-```{python}
+```{python QQ-plot}
 # Change theme to "white"
 sns.set_style("white")
 
@@ -353,9 +353,9 @@ plt.tight_layout()
 plt.show()
 ```
 
-You can also produce these plots for all numerical columns with a for-loop.
+You can also produce these plots for all numerical columns with a for-loop (output not shown).
 
-```{python, eval = FALSE}
+```{python QQ-plot-all, eval = FALSE}
 # Change theme to "white"
 sns.set_style("white")
 
@@ -397,7 +397,7 @@ Looking within Age_group at the subgroup normality.
 
 #### Shapiro-Wilk Test
 
-```{python}
+```{python group-norm-test}
 # Make a copy of the data 
 dataCopy = data.copy()
 
@@ -438,7 +438,7 @@ for i_col in dataRedColsList:
 
 #### Q-Q Plots
 
-```{python}
+```{python group-QQ-plot}
 # Make a copy of the data 
 dataCopy = data.copy()
 

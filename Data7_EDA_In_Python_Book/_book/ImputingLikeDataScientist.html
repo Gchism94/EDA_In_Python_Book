@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Data7 Exploratory Data Analysis In Python Book - Exploratory Data Analysis in Python - Imputing like a Data Scientist</title>
+<title>Data7 Exploratory Data Analysis In Python Book - Imputing like a Data Scientist</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -129,7 +129,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Exploratory Data Analysis in Python - Imputing like a Data Scientist</h1>
+      <h1 class="quarto-secondary-nav-title">Imputing like a Data Scientist</h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -167,27 +167,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./DiagnosingLikeDataDoctor.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Diagnosing like a Data Doctor</a>
+  <a href="./DiagnosingLikeDataDoctor.html" class="sidebar-item-text sidebar-link">Diagnosing like a Data Doctor</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ExploringLikeDataAdventurer.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Exploring like a Data Adventurer</a>
+  <a href="./ExploringLikeDataAdventurer.html" class="sidebar-item-text sidebar-link">Exploring like a Data Adventurer</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./TransformingLikeDataTrans.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Transforming like a Data… Transformer</a>
+  <a href="./TransformingLikeDataTrans.html" class="sidebar-item-text sidebar-link">Transforming like a Data… Transformer</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./ImputingLikeDataScientist.html" class="sidebar-item-text sidebar-link active">Exploratory Data Analysis in Python - Imputing like a Data Scientist</a>
+  <a href="./ImputingLikeDataScientist.html" class="sidebar-item-text sidebar-link active">Imputing like a Data Scientist</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./CorrelateLikeDataMaster.html" class="sidebar-item-text sidebar-link">Exploratory Data Analysis in Python - Correlate Like a Data Master</a>
+  <a href="./CorrelateLikeDataMaster.html" class="sidebar-item-text sidebar-link">Correlate Like a Data Master</a>
   </div>
 </li>
     </ul>
@@ -199,8 +199,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#purpose-of-workshop" id="toc-purpose-of-workshop" class="nav-link active" data-scroll-target="#purpose-of-workshop">Purpose of Workshop</a></li>
-  <li><a href="#objectives" id="toc-objectives" class="nav-link" data-scroll-target="#objectives">Objectives</a></li>
+  <li><a href="#purpose-of-this-chapter" id="toc-purpose-of-this-chapter" class="nav-link active" data-scroll-target="#purpose-of-this-chapter">Purpose of this chapter</a></li>
+  <li><a href="#take-aways" id="toc-take-aways" class="nav-link" data-scroll-target="#take-aways">Take-aways</a></li>
   <li><a href="#required-setup" id="toc-required-setup" class="nav-link" data-scroll-target="#required-setup">Required Setup</a></li>
   <li><a href="#load-and-examine-a-data-set" id="toc-load-and-examine-a-data-set" class="nav-link" data-scroll-target="#load-and-examine-a-data-set">Load and Examine a Data Set</a></li>
   <li><a href="#diagnose-your-data" id="toc-diagnose-your-data" class="nav-link" data-scroll-target="#diagnose-your-data">Diagnose your Data</a></li>
@@ -228,7 +228,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Exploratory Data Analysis in Python - Imputing like a Data Scientist</h1>
+<h1 class="title d-none d-lg-block">Imputing like a Data Scientist</h1>
 </div>
 
 
@@ -242,13 +242,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 </header>
 
-<section id="purpose-of-workshop" class="level2">
-<h2 class="anchored" data-anchor-id="purpose-of-workshop">Purpose of Workshop</h2>
+<section id="purpose-of-this-chapter" class="level2">
+<h2 class="anchored" data-anchor-id="purpose-of-this-chapter">Purpose of this chapter</h2>
 <p><strong>Exploring, visualizing, and imputing outliers and missing values (NAs) in a novel data set</strong></p>
+<p><strong>IMPORTANT NOTE</strong>: imputation should only be used when missing data is unavoidable and probably limited to 10% of your data being outliers / missing data (though some argue imputation is necessary between 30-60%). Ask what the cause is for the outlier and missing data.</p>
 <hr>
 </section>
-<section id="objectives" class="level2">
-<h2 class="anchored" data-anchor-id="objectives">Objectives</h2>
+<section id="take-aways" class="level2">
+<h2 class="anchored" data-anchor-id="take-aways">Take-aways</h2>
 <ol type="1">
 <li>Load and explore a data set with publication quality tables</li>
 <li>Thoroughly diagnose outliers and missing values</li>
@@ -292,12 +293,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="co"># Predictive data analysis: Plotting decision regions</span></span>
 <span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> mlxtend.plotting <span class="im">import</span> plot_decision_regions</span>
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Increase font size of all seaborn plot elements</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale <span class="op">=</span> <span class="fl">1.5</span>, rc <span class="op">=</span> {<span class="st">'figure.figsize'</span>:(<span class="dv">8</span>, <span class="dv">8</span>)})</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co"># Change theme to "white"</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Increase font size of all seaborn plot elements</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale <span class="op">=</span> <span class="fl">1.5</span>, rc <span class="op">=</span> {<span class="st">'figure.figsize'</span>:(<span class="dv">8</span>, <span class="dv">8</span>)})</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="co"># Change theme to "white"</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"white"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 </section>
@@ -452,8 +452,9 @@ Number of Outliers:  0</code></pre>
 <li><p><code>q75</code>: 3/4 quartile, 75th percentile</p></li>
 <li><p><code>IQR</code>: interquartile range (q75-q25)</p></li>
 <li><p><code>lower</code>: lower limit of <span class="math inline">\(1.5*IQR\)</span> used to calculate outliers</p></li>
-<li><h2 id="upper-upper-limit-of-1.5iqr-used-to-calculate-outliers" class="anchored"><code>upper</code>: upper limit of <span class="math inline">\(1.5*IQR\)</span> used to calculate outliers</h2></li>
+<li><p><code>upper</code>: upper limit of <span class="math inline">\(1.5*IQR\)</span> used to calculate outliers</p></li>
 </ul>
+<hr>
 </section>
 <section id="basic-exploration-of-missing-values-nas" class="level2">
 <h2 class="anchored" data-anchor-id="basic-exploration-of-missing-values-nas">Basic Exploration of Missing Values (NAs)</h2>
@@ -504,7 +505,7 @@ dtype: int64</code></pre>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="ImputingLikeDataScientist_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="768"></p>
+<p><img src="ImputingLikeDataScientist_files/figure-html/NA-matrix-1.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
@@ -516,39 +517,37 @@ dtype: int64</code></pre>
 <p>Removing outliers and NAs can be tricky, but there are methods to do so. I will go over several, and discuss benefits and costs to each.</p>
 <p>The principle goal for all imputation is to find the method that does not change the distribution too much (or oddly).</p>
 <hr>
-<p><strong>NOTE: imputation should only be used when missing data is unavoidable and probably limited to 10% of your data being outliers / missing data (though some argue imputation is necessary between 30-60%). Ask what the cause is for the outlier and missing data.</strong></p>
-<hr>
 <section id="classifying-outliers" class="level3">
 <h3 class="anchored" data-anchor-id="classifying-outliers">Classifying Outliers</h3>
 <p>Before imputing outliers, you will want to diagnose whether it’s they are natural outliers or not. We will be looking at “Insulin” for example across Age_group, because there are several outliers and NAs, which we will impute below.</p>
 <div class="cell" data-layout-align="right">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Increase font size of all seaborn plot elements</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale <span class="op">=</span> <span class="fl">1.5</span>, rc <span class="op">=</span> {<span class="st">'figure.figsize'</span>:(<span class="dv">8</span>, <span class="dv">8</span>)})</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(font_scale <span class="op">=</span> <span class="fl">1.25</span>, rc <span class="op">=</span> {<span class="st">'figure.figsize'</span>:(<span class="dv">6</span>, <span class="dv">8</span>)})</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Change theme to "white"</span></span>
 <span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>sns.set_style(<span class="st">"white"</span>)</span>
 <span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Box plot</span></span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>Age_Box <span class="op">=</span> sns.boxplot(data <span class="op">=</span> data, x <span class="op">=</span> <span class="st">"Insulin"</span>, y <span class="op">=</span> <span class="st">"Age_group"</span>, width <span class="op">=</span> <span class="fl">.3</span>)</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>Age_Box <span class="op">=</span> sns.boxplot(data <span class="op">=</span> data, x <span class="op">=</span> <span class="st">"Insulin"</span>, y <span class="op">=</span> <span class="st">"Age_group"</span>, width <span class="op">=</span> <span class="fl">0.3</span>)</span>
 <span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Tweak the visual presentation</span></span>
 <span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>Age_Box.<span class="bu">set</span>(ylabel <span class="op">=</span> <span class="st">"Age group"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div class="quarto-figure quarto-figure-right">
 <figure class="figure">
-<p><img src="ImputingLikeDataScientist_files/figure-html/unnamed-chunk-8-3.png" class="img-fluid figure-img" width="768"></p>
+<p><img src="ImputingLikeDataScientist_files/figure-html/boxplot-outliers-3.png" class="img-fluid figure-img" width="768"></p>
 </figure>
 </div>
 </div>
 </div>
 <p>Now let’s say that we want to impute extreme values and remove outliers that don’t make sense, such as Insulin levels &gt; 600 mg/dL: values greater than this induce a diabetic coma.</p>
 <p>We remove outliers using <code>SimpleImputer</code> from <code>sklearn</code> and replace them with values that are estimates based on the existing data</p>
-<ul>
-<li><p>mean: arithmetic mean</p></li>
-<li><p>median: median</p></li>
-<li><p>mode: mode</p></li>
-<li><p>capping: Impute the upper outliers with 95 percentile, and impute the bottom outliers with 5 percentile - aka Winsorizing</p></li>
-</ul>
+<ol type="1">
+<li><strong>Mean</strong>: arithmetic mean</li>
+<li><strong>Median</strong>: median</li>
+<li><strong>Mode</strong>: mode</li>
+<li><strong>Capping</strong>: Impute the upper outliers with 95 percentile, and impute the bottom outliers with 5 percentile - aka Winsorizing</li>
+</ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Select only Insulin</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>InsMod <span class="op">=</span> data.<span class="bu">filter</span>([<span class="st">"Insulin"</span>], axis <span class="op">=</span> <span class="st">"columns"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -585,7 +584,7 @@ dtype: int64</code></pre>
 <span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ImputingLikeDataScientist_files/figure-html/unnamed-chunk-11-5.png" class="img-fluid" width="768"></p>
+<p><img src="ImputingLikeDataScientist_files/figure-html/mean-imp-ins-plot-5.png" class="img-fluid" width="768"></p>
 </div>
 </div>
 <hr>
@@ -620,7 +619,7 @@ dtype: int64</code></pre>
 <span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
 <span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ImputingLikeDataScientist_files/figure-html/unnamed-chunk-13-7.png" class="img-fluid" width="768"></p>
+<p><img src="ImputingLikeDataScientist_files/figure-html/med-imp-ins-plot-7.png" class="img-fluid" width="768"></p>
 </div>
 </div>
 <hr>
@@ -671,7 +670,7 @@ dtype: int64</code></pre>
 <span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
 <span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ImputingLikeDataScientist_files/figure-html/unnamed-chunk-15-9.png" class="img-fluid" width="768"></p>
+<p><img src="ImputingLikeDataScientist_files/figure-html/mode-imp-ins-plot-9.png" class="img-fluid" width="768"></p>
 </div>
 </div>
 <hr>
@@ -736,8 +735,8 @@ dtype: int64</code></pre>
 <h2 class="anchored" data-anchor-id="imputing-nas">Imputing NAs</h2>
 <p>I will only be addressing a subset of methods for NA imputation, but you can use the mean, median, and mode methods from above as well:</p>
 <ol type="1">
-<li>KNN: K-nearest neighbors</li>
-<li>MICE: Multivariate Imputation by Chained Equations</li>
+<li><strong>KNN</strong>: K-nearest neighbors</li>
+<li><strong>MICE</strong>: Multivariate Imputation by Chained Equations</li>
 </ol>
 <p>Since our normal <code>data</code> has no NA values, we will add the <code>Insulin</code> column from the <code>dataNA</code> we created earlier and replace the original with it.</p>
 <div class="cell">
@@ -790,7 +789,7 @@ dtype: int64</code></pre>
 <span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Create KNN plot for 3 nearest neighbors</span></span>
 <span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>knn_comparision(data1, <span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ImputingLikeDataScientist_files/figure-html/unnamed-chunk-20-11.png" class="img-fluid" width="768"></p>
+<p><img src="ImputingLikeDataScientist_files/figure-html/knn-ex-plot-prep-11.png" class="img-fluid" width="768"></p>
 </div>
 </div>
 <p>You can also loop the KNN plots for i nearest neighbors:</p>
@@ -853,7 +852,7 @@ dtype: int64</code></pre>
 <span id="cb30-14"><a href="#cb30-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
 <span id="cb30-15"><a href="#cb30-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ImputingLikeDataScientist_files/figure-html/unnamed-chunk-26-13.png" class="img-fluid" width="768"></p>
+<p><img src="ImputingLikeDataScientist_files/figure-html/knn-imp-plot-13.png" class="img-fluid" width="768"></p>
 </div>
 </div>
 <hr>
@@ -896,10 +895,10 @@ dtype: int64</code></pre>
 <span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization of the MICE imputation</span></span>
 <span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Original data</span></span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>knn_plot <span class="op">=</span> sns.kdeplot(data <span class="op">=</span> dataCopy, x <span class="op">=</span> <span class="st">'Insulin'</span>, linewidth <span class="op">=</span> <span class="dv">2</span>, label <span class="op">=</span> <span class="st">"Original"</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>mice_plot <span class="op">=</span> sns.kdeplot(data <span class="op">=</span> dataCopy, x <span class="op">=</span> <span class="st">'Insulin'</span>, linewidth <span class="op">=</span> <span class="dv">2</span>, label <span class="op">=</span> <span class="st">"Original"</span>)</span>
 <span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># KNN imputation</span></span>
-<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>knn_plot <span class="op">=</span> sns.kdeplot(data <span class="op">=</span> dataCopy, x <span class="op">=</span> <span class="st">'InsMice'</span>, linewidth <span class="op">=</span> <span class="dv">2</span>, label <span class="op">=</span> <span class="st">"MICE Imputated"</span>)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a><span class="co"># MICE imputation</span></span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>mice_plot <span class="op">=</span> sns.kdeplot(data <span class="op">=</span> dataCopy, x <span class="op">=</span> <span class="st">'InsMice'</span>, linewidth <span class="op">=</span> <span class="dv">2</span>, label <span class="op">=</span> <span class="st">"MICE Imputated"</span>)</span>
 <span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb32-11"><a href="#cb32-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Show legend</span></span>
 <span id="cb32-12"><a href="#cb32-12" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
@@ -907,7 +906,7 @@ dtype: int64</code></pre>
 <span id="cb32-14"><a href="#cb32-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Show plot</span></span>
 <span id="cb32-15"><a href="#cb32-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<p><img src="ImputingLikeDataScientist_files/figure-html/unnamed-chunk-28-15.png" class="img-fluid" width="768"></p>
+<p><img src="ImputingLikeDataScientist_files/figure-html/MICE-imp-plot-15.png" class="img-fluid" width="768"></p>
 </div>
 </div>
 <hr>
@@ -1030,12 +1029,12 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="./TransformingLikeDataTrans.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exploratory Data Analysis in Python - Transforming like a Data… Transformer</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Transforming like a Data… Transformer</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="./CorrelateLikeDataMaster.html" class="pagination-link">
-        <span class="nav-page-text">Exploratory Data Analysis in Python - Correlate Like a Data Master</span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text">Correlate Like a Data Master</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

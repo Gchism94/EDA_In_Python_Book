@@ -2,7 +2,7 @@
 bibliography: references.bib
 ---
 
-# Exploratory Data Analysis in Python - Diagnosing like a Data Doctor {.unnumbered}
+# Diagnosing like a Data Doctor {.unnumbered}
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE) 
@@ -28,13 +28,13 @@ py_install("pandas-profiling")
 py_install("ipywidgets")
 ```
 
-## Purpose of Materials
+## Purpose of this chapter
 
 **Exploring a novel data set and produce an HTML interactive reports**
 
 ------------------------------------------------------------------------
 
-## Objectives
+## Take-aways
 
 1.  Load and explore a data set with publication quality tables
 2.  Diagnose outliers and missing values in a data set
@@ -46,7 +46,7 @@ py_install("ipywidgets")
 
 We first need to prepare our environment with the necessary libraries and set a global theme for publishable plots in `seaborn`.
 
-```{python, echo = TRUE}
+```{python req-setup, echo = TRUE}
 # Import all required libraries
 # Data analysis and manipulation
 import pandas as pd
@@ -81,7 +81,7 @@ sns.set(font_scale = 1.25)
 
 We will be using open source data from UArizona researchers for Test, Trace, Treat (T3) efforts offers two clinical diagnostic tests (Antigen, RT-PCR) to determine whether an individual is currently infected with the COVID-19 virus. [@merchant2022]
 
-```{python}
+```{python read-data}
 # Read csv 
 data = pd.read_csv("data/daily_summary.csv")
 
@@ -93,7 +93,7 @@ data.head()
 
 ## Diagnose your Data
 
-```{python}
+```{python data-info}
 # What are the properties of the data
 diagnose = data.info()
 ```
@@ -108,7 +108,7 @@ diagnose = data.info()
 
 ### Numerical Variables
 
-```{python}
+```{python summ-stats-cont}
 # Summary statistics of our numerical columns
 data.describe()
 ```
@@ -145,7 +145,7 @@ There are several numerical variables that have outliers above, let's see what t
 
 -   Plot outliers in a box plot and histogram
 
-```{python}
+```{python outliers-test}
 # Make a copy of the data 
 dataCopy = data.copy()
 
@@ -191,7 +191,7 @@ for i_col in dataRedColsList:
 -   `lower`: lower limit of $1.5*IQR$ used to calculate outliers
 -   `upper`: upper limit of $1.5*IQR$ used to calculate outliers
 
-```{python}
+```{python boxplot-outliers}
 # Change theme to "white"
 sns.set_style("white")
 
@@ -207,7 +207,7 @@ sns.boxplot(data = data_melted, x = 'variable', y = 'value', hue = 'variable' , 
 
 Note the extreme number of outliers represented in the boxplot
 
-```{python}
+```{python boxplot-no-outliers}
 # Find Q1, Q3, and interquartile range (IQR) for each column
 Q1 = dataRedColsList.quantile(q = .25)
 Q3 = dataRedColsList.quantile(q = .75)
@@ -229,7 +229,7 @@ But the distribution changes dramatically when we remove outliers with the IQR m
 
 -   Table showing the extent of NAs in columns containing them
 
-```{python}
+```{python NA-table}
 # Copy of the data
 dataNA = data
 
@@ -243,16 +243,17 @@ dataNA.isnull().sum()
 
 Bar plot showing all NA values in each column. Since we randomly produced a set amount above the numbers will all be the same.
 
-```{python}
+```{python NA-barplot}
 # Bar plot showing the number of NAs in each column
 msno.bar(dataNA, figsize = (8, 8), fontsize = 10)
+plt.tight_layout()
 ```
 
 ------------------------------------------------------------------------
 
 ### Categorical Variables
 
-```{python}
+```{python describe-cat}
 # Select only categorical columns (objects) and describe
 data.describe(exclude = [np.number]) 
 ```
@@ -269,9 +270,9 @@ data.describe(exclude = [np.number])
 
 ## Produce an HTML Summary of a Data Set
 
-```{python, eval = FALSE}
+```{python HTML-profile, eval = FALSE}
 # Producing a pandas-profiling report 
-# profile = ProfileReport(data, title = "Pandas Profiling Report")
+profile = ProfileReport(data, title = "Pandas Profiling Report")
 
 # HTML output
 profile.to_widgets()

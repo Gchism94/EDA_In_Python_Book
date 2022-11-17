@@ -4,41 +4,41 @@ Here you will find a collection of materials prepared by the staff of the [Data 
 
 ------------------------------------------------------------------------
 
-## Exploratory data analysis in Python - Diagnosing like a data doctor
+## Diagnosing like a data doctor
 
-### Purpose of Materials
+### Chapter summary
 
 Exploring a novel data set and produce an HTML interactive reports
 
 ------------------------------------------------------------------------
 
-## Exploratory data analysis in Python - Exploring like a data adventurer
+## Exploring like a data adventurer
 
-### Purpose of the Materials
+### Chapter summary
 
 Exploring the normality of numerical columns in a novel data set
 
 ------------------------------------------------------------------------
 
-## Exploratory Data Analysis in Python - Transforming like a Data... Transformer
+## Transforming like a Data... Transformer
 
-### Purpose of the Materials
+### Chapter summary
 
 Using data transformation to correct non-normality in numerical data
 
 ------------------------------------------------------------------------
 
-## Exploratory Data Analysis in Python - Imputating like a Data Scientist
+## Imputating like a Data Scientist
 
-### Purpose of the Materials
+### Chapter summary
 
 Exploring, visualizing, and imputing outliers and missing values (NAs) in a novel data set
 
 ------------------------------------------------------------------------
 
-## Exploratory Data Analysis in Python - Correlate Like a Data Master
+## Correlating Like a Data Master
 
-### Purpose of the Materials
+### Chapter summary
 
 Assess relationships within a novel data set
 
@@ -48,6 +48,6 @@ Assess relationships within a novel data set
 
 ------------------------------------------------------------------------
 
-Created: 09/14/2022 (G. Chism); Last update: 09/14/2022
+Created: 09/14/2022 (G. Chism); Last update: 11/17/2022
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/CC_BY-NC-SA.svg/800px-CC_BY-NC-SA.svg.png?20181117113353" width="150" height="50"/> [CC BY-NC-SA](https://creativecommons.org/licenses/by-nc-sa/4.0/)

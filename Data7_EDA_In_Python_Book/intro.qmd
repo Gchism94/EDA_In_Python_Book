@@ -26,11 +26,11 @@ py_install("scikit-learn")
 
 Here, we utilize the [pandas](https://pandas.pydata.org/) and [pandas-profiling](https://github.com/ydataai/pandas-profiling) libraries to conduct preliminary exploratory data analysis aimed at diagnosing any major issues with an imported data set. pandas and pandas-profiling offers a clean and straightforward methodology to uncover issues such as data [outliers](https://en.wikipedia.org/wiki/Outlier), [missing data](https://en.wikipedia.org/wiki/Missing_data), as well as summary statistical reports.
 
-### What is Exploratory Data Analysis?
+## What is Exploratory Data Analysis?
 
 Exploratory data analysis is a [statistical](https://en.wikipedia.org/wiki/Statistics), approach towards analyzing [data sets](https://en.wikipedia.org/wiki/Data_set) to investigate and summarize their main characteristics, often through [statistical graphics](https://en.wikipedia.org/wiki/Statistical_graphics) and other data visualization methods.
 
-```{python}
+```{python req-setup-EDAplot}
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -65,7 +65,7 @@ plt.show()
 
 ------------------------------------------------------------------------
 
-## **What are Some Important Data Set Characteristics?**
+## What are Some Important Data Set Characteristics?
 
 There are several characteristics that are arguably important, but we will only consider those covered in this workshop series. Let's start with the fundamentals that will help guide us.
 
@@ -79,7 +79,7 @@ When importing data sets, it is important to consider characteristics about the 
 
 Name of each variable
 
-```{python}
+```{python data-head}
 data.head()
 ```
 
@@ -87,7 +87,7 @@ data.head()
 
 Data type of each variable
 
-```{python}
+```{python data-types}
 data.dtypes
 ```
 
@@ -95,7 +95,7 @@ data.dtypes
 
 Measurable numbers that are fractional or decimal and cannot be counted (e.g., time, height, weight)
 
-```{python}
+```{python plot-continuous}
 # Change seaborn plot theme to white
 sns.set_style("white")
 sns.kdeplot(x = "BMI", 
@@ -106,7 +106,7 @@ sns.kdeplot(x = "BMI",
 
 Countable whole numbers or integers (e.g., number of successes or failures)
 
-```{python}
+```{python plot-discrete}
 sns.set_style("white")
 
 line = sns.countplot(data = data, x = "Outcome", hue = "Age_group")
@@ -124,7 +124,7 @@ plt.show()
 
 Labeling variables without any order or quantitative value (e.g., hair color, nationality)
 
-```{python}
+```{python plot-nominal}
 def Outcome_data(data): 
   if data.Outcome == 1: return "Yes"
   else: return "No"
@@ -140,7 +140,7 @@ sns.stripplot(data = data, x = "Outcome1", y = "BMI", alpha = 0.5, hue = "Outcom
 
 Where there is a hierarchical order along a scale (e.g., ranks, letter grades, age groups)
 
-```{python}
+```{python plot-ordinal}
 sns.set_style("white")
 
 AgeStrip = sns.stripplot(data = data, x = "Age_group", y = "BMI", alpha = 0.5, hue = "Age_group", s = 15)
@@ -156,7 +156,7 @@ Cells, rows, or columns without data
 
 -   Unique rate: rate of unique value - unique count / total number of observations.
 
-```{python}
+```{python NAs}
 dataNA = data
 
 for col in dataNA.columns:
@@ -183,14 +183,14 @@ Measuring a central property of your data. Some examples you've probably heard o
 
 -   Mode: Most common value
 
-```{python}
+```{python cent-tend}
 kde = sns.kdeplot(data = data, x = "BMI", linewidth = 7, color = "black")
 kde.axvline(x = data.BMI.mean(), ymin = 0, ymax = max(data.BMI), linewidth = 7, color = 'gray', linestyle='--')
 ```
 
 Notice that all values of central tendency can be pretty similar in this figure.
 
-```{python}
+```{python norm-plot}
 mode_Ins = stat.mode(data.Insulin)
 
 
@@ -208,7 +208,7 @@ kde1.text(125, 0.0035, "Mode", horizontalalignment = 'left', size= 'medium', col
 
 However, in this figure, all measures are different. This will be important when we discuss statistical dispersion in chapter 3.
 
-```{python, output = F}
+```{python bug-fix, output = FALSE}
 sns.kdeplot(x = "BMI", 
   data = data) 
 ```
@@ -223,7 +223,7 @@ Measure of data variability, scatter, or spread. Some examples you may have hear
 
 -   Outliers: A value outside of $1.5 * IQR$
 
-```{python, eval = FALSE}
+```{python stat-dispersion, eval = FALSE}
 
 q3, q1 = np.percentile(data.BMI, [75 ,25])
 
@@ -290,7 +290,7 @@ Measures of describing the shape of a distribution, usually compared to a normal
 
 -   Kurtosis: The tailedness of the distribution
 
-```{python}
+```{python dist-shape}
 minmax_Insulin = pproc.minmax_scale(data.Insulin)
 
 minmax_Glucose = pproc.minmax_scale(data.Glucose)
@@ -318,7 +318,7 @@ Measure of causality between two random variables (statistically). Notably, we a
 
 -   Numerical values, but you can compare numericals across categories (see the first plot above).
 
-```{python}
+```{python correlation}
 # increase font size of all elements
 sns.set(font_scale = 1.5)
 

@@ -1,4 +1,4 @@
-# Exploratory Data Analysis in Python - Transforming like a Data... Transformer {.unnumbered}
+# Transforming like a Data... Transformer {.unnumbered}
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
@@ -23,13 +23,13 @@ py_install("missingno")
 py_install("statsmodels")
 ```
 
-## Purpose of Workshop
+## Purpose of this chapter
 
 **Using data transformation to correct non-normality in numerical data**
 
 ------------------------------------------------------------------------
 
-## Objectives
+## Take-aways
 
 1.  Load and explore a data set with publication quality tables
 2.  Quickly diagnose non-normality in data
@@ -41,7 +41,7 @@ py_install("statsmodels")
 
 We first need to prepare our environment with the necessary libraries
 
-```{python, echo = TRUE}
+```{python req-setup, echo = TRUE}
 # Import all required libraries
 # Data analysis and manipulation
 import pandas as pd
@@ -77,7 +77,7 @@ sns.set_style("white")
 -   Examine data normality
 -   Describe properties of data
 
-```{python}
+```{python load-data}
 # Read csv 
 data = pd.read_csv("data/diabetes.csv")
 
@@ -110,7 +110,7 @@ Here are the distribution properties to know and consider:
 
 Here's an example using the `Glucose` column in our `dataset`
 
-```{python, echo = FALSE}
+```{python norm-data, echo = FALSE}
 # Histogram
 hist1 = sns.histplot(data = data, x = "BMI", element = "step", color = "#0072B2")
 
@@ -153,7 +153,7 @@ The symmetry of the distribution
 
 See @sec-distribution-shape for more information about these values
 
-```{python}
+```{python dist-symm}
 # Make a copy of the data 
 dataCopy = data.copy()
 
@@ -182,7 +182,6 @@ for i_col in dataRedColsList:
   
   # Print skewness and kurtosis
   print('skewness =', skewness, 'kurtosis =', kurtosis)
-
 ```
 
 -   `skewness`: skewness
@@ -206,7 +205,7 @@ for i_col in dataRedColsList:
 
 Plots of the quartiles of a target data set and plot it against predicted quartiles from a normal distribution (see -@sec-normality-within-groups for density and Q-Q plots)
 
-```{python}
+```{python QQ-plot}
 # Make a copy of the data 
 dataCopy = data.copy()
 
@@ -238,7 +237,7 @@ Looking within Age_group at the subgroup normality
 
 #### Q-Q Plots
 
-```{python}
+```{python group-QQ-plot}
 # Make a copy of the data 
 dataCopy = data.copy()
 
@@ -276,7 +275,7 @@ Your data could be more easily interpreted with a transformation, since not all 
 
 We will try to transform the `Insulin` column with through several approaches and discuss the pros and cons of each. First however, we will remove `0` values, because `Insulin` values are impossible...
 
-```{python}
+```{python ins-subset}
 # Filter insulin greater than 0
 Ins = data[data.Insulin > 0]
 
@@ -308,7 +307,7 @@ We will compare `sqrt`, `log+1`, and `1/x` (inverse) transformations. Note that 
 
 #### Square-root Transformation
 
-```{python}
+```{python sqrt-ins}
 # Square-root transform the data in a new column
 InsMod['Ins_Sqrt'] = np.sqrt(InsMod['Insulin'])
 
@@ -351,7 +350,7 @@ plt.show()
 
 #### Logarithmic (+1) Transformation
 
-```{python}
+```{python log-ins}
 # Logarithmic transform the data in a new column
 InsMod['Ins_Log'] = np.log(InsMod['Insulin'] + 1)
 
@@ -394,7 +393,7 @@ plt.show()
 
 #### Inverse Transformation
 
-```{python}
+```{python inv-ins}
 # Inverse transform the data in a new column
 InsMod['Ins_Inv'] = 1/InsMod.Insulin
 
@@ -439,7 +438,7 @@ plt.show()
 
 There are several transformations, each with it's own "criteria", and they don't always fix extremely skewed data. Instead, you can just choose the [Box-Cox transformation](https://en.wikipedia.org/wiki/Box%E2%80%93Cox_distribution) which searches for the the best lambda value that maximizes the log-likelihood (basically, what power transformation is best). The benefit is that you should have normally distributed data after, but the power relationship might be pretty abstract (i.e., what would a transformation of x\^0.12 be interpreted as in your system?..)
 
-```{python}
+```{python boxcox-ins}
 # Box-cox transform the data in a new column
 InsMod['Ins_Boxcox'], parameters = stats.boxcox(InsMod['Insulin'])
 

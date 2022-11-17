@@ -2,7 +2,7 @@
 bibliography: references.bib
 ---
 
-# Exploratory Data Analysis in Python - Correlate Like a Data Master {.unnumbered}
+# Correlate Like a Data Master {.unnumbered}
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
@@ -27,13 +27,13 @@ py_install("missingno")
 py_install("statsmodels")
 ```
 
-## Purpose of workshop
+## Purpose of this chapter
 
 **Assess relationships within a novel data set**
 
 ------------------------------------------------------------------------
 
-## Objectives
+## Take-aways
 
 1.  Describe and visualize correlations between numerical variables
 2.  Visualize correlations of all numerical variables within groups
@@ -45,7 +45,7 @@ py_install("statsmodels")
 
 We first need to prepare our environment with the necessary libraries and set a global theme for publishable plots in `seaborn`.
 
-```{python, echo = TRUE}
+```{python req-setup, echo = TRUE}
 # Import all required libraries
 # Data analysis and manipulation
 import pandas as pd
@@ -90,7 +90,7 @@ sns.set_style("white")
 
 We will be using open source data from UArizona researchers that investigates the effects of climate change on canopy trees. [@meredith2021]
 
-```{python}
+```{python load-data}
 # Read csv 
 data = pd.read_csv("data/Data_Fig2_Repo.csv")
 
@@ -108,12 +108,12 @@ data.head()
 
 Note that the we will use the [Pearson's $r$ coefficient](https://en.wikipedia.org/wiki/Pearson_correlation_coefficienthttps://en.wikipedia.org/wiki/Pearson_correlation_coefficient) in `corr()` function from the `pandas` library, but you can specify any method you would like: `corr(method = "")`, where the method can be `"pearson"` for Pearson's $r$, `"spearman"` for [Spearman's](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient) $\rho$, or `"kendall"` for [Kendall's](https://en.wikipedia.org/wiki/Kendall_rank_correlation_coefficient) $\tau$. The main differences are that Pearson's $r$ assumes a normal distribution for ALL numerical variables, whereas Spearman's $\rho$ and Kendall's $\tau$ do not, but Spearman's $\rho$ requires $N > 10$, and Kendall's $\tau$ does not. Notably, Kendall's $\tau$ performs as well as Spearman's $\rho$ when $N > 10$, so its best to just use Kendall's $\tau$ when data are not normally distributed.
 
-```{python}
+```{python corr-matrix}
 # Table of correlations between numerical variables (we are sticking to the default Pearson's r coefficient)
 data.corr()
 ```
 
-```{python}
+```{python corr-plot}
 # Heatmap correlation matrix of numerical variables
 # Correlation matrix
 corr = data.corr()
@@ -141,7 +141,7 @@ plt.show()
 
 If we have groups that we will compare later on, it is a good idea to see how each numerical variable correlates within these groups.
 
-```{python}
+```{python group-corr-plot}
 # Increase font and figure size of all seaborn plot elements
 sns.set(font_scale = 1.5, rc = {'figure.figsize':(10, 10)})
 
@@ -176,7 +176,7 @@ This is great, we have our correlations within groups! However, the correlation 
 
 Specifically, we are looking at the correlations between predawn leaf water potential `pLWP` and midday leaf water potential `mLWP`. Leaf water potential is a key indicator for how stressed plants are in droughts.
 
-```{python}
+```{python grid-plot}
 dataplot = data[["Group", "pLWP", "mLWP"]]
 
 # Increase font and figure size of all seaborn plot elements
@@ -222,7 +222,7 @@ The relationships below will have the formula relationship `target ~ predictor`.
 
 `Formula: pLWP (numerical)  ~ mLWP (numerical)`
 
-```{python}
+```{python num-num}
 # The numerical predictor variable 
 X = data[["mLWP"]]
 
@@ -239,7 +239,7 @@ model_result = model.fit()
 model_result.summary()
 ```
 
-```{python, message = FALSE, warning = FALSE}
+```{python plot-num-num, message = FALSE, warning = FALSE}
 # Plotting the linear relationship
 
 # Increase font and figure size of all seaborn plot elements
@@ -277,13 +277,13 @@ plt.show()
 
 Formula: `Group (categorical) ~ pLWP (numerical)`
 
-```{python}
+```{python cat-num}
 model = ols('pLWP ~ C(Group)', data = data).fit()
 
 sm.stats.anova_lm(model, typ = 2)
 ```
 
-```{python}
+```{python plot-cat-num}
 #| fig-align: right
 
 # Increase font and figure size of all seaborn plot elements
@@ -305,7 +305,7 @@ plt.tight_layout()
 plt.show()
 ```
 
-```{python}
+```{python group-stats-cat-num}
 # Grouped describe by one column, stacked 
 Groups = data.groupby('Group').describe().unstack(1)
 
@@ -321,7 +321,7 @@ Notably, there is only one categorical variable... Let's make another:
 
 If $mLWP > mean(mLWP) + sd(mLWP)$ then `Yes`, else `No`.
 
-```{python}
+```{python new-cat}
 data1 = data.dropna()
 Qual = stat.mean(data1.pLWP + stat.stdev(data1.pLWP))
 
@@ -347,7 +347,7 @@ Now we have two categories!
 
 Formula = `Group (categorical) ~ HighLWP (categorical)`
 
-```{python}
+```{python cat-cat}
 obs = pd.crosstab(data1.Group, data1.HighLWP)
 print(obs)
 
@@ -365,7 +365,7 @@ else:
 	print('Chi-square value is greater than critical value (reject H0)')
 ```
 
-```{python}
+```{python plot-cat-cat}
 #| fig-align: center
 
 # Increase font and figure size of all seaborn plot elements
