@@ -2,7 +2,7 @@
 bibliography: references.bib
 ---
 
-# Correlate Like a Data Master {.unnumbered}
+# Correlating Like a Data Master {.unnumbered}
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(warning = FALSE, message = FALSE) 
@@ -208,8 +208,6 @@ plt.show()
 
 ## Describe and Visualize Relationships Based on Target Variables
 
-------------------------------------------------------------------------
-
 ### Target Variables
 
 `Target variables` are essentially numerical or categorical variables that you want to relate others to in a data frame.
@@ -275,15 +273,15 @@ plt.show()
 
 ### Numerical Target Variables: Categorical Variable of Interest
 
-Formula: `Group (categorical) ~ pLWP (numerical)`
+Formula: `pLWP (numerical) ~ Group (categorical)`
 
-```{python cat-num}
+```{python num-cat}
 model = ols('pLWP ~ C(Group)', data = data).fit()
 
 sm.stats.anova_lm(model, typ = 2)
 ```
 
-```{python plot-cat-num}
+```{python plot-num-cat}
 #| fig-align: right
 
 # Increase font and figure size of all seaborn plot elements
@@ -304,6 +302,12 @@ plt.tight_layout()
 # Show plot
 plt.show()
 ```
+
+------------------------------------------------------------------------
+
+### Categorical Target Variables: Numerical Variable of Interest
+
+Formula: `Group (categorical) ~ pLWP (numerical)`
 
 ```{python group-stats-cat-num}
 # Grouped describe by one column, stacked 

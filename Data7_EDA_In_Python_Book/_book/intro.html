@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.0.36">
+<meta name="generator" content="quarto-1.1.189">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,10 +11,15 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
@@ -143,7 +148,7 @@ div.csl-indent {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./CorrelateLikeDataMaster.html" class="sidebar-item-text sidebar-link">Correlate Like a Data Master</a>
+  <a href="./CorrelateLikeDataMaster.html" class="sidebar-item-text sidebar-link">Correlating Like a Data Master</a>
   </div>
 </li>
     </ul>
@@ -151,7 +156,7 @@ div.csl-indent {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc">
+        <nav id="TOC" role="doc-toc" class="toc-active">
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
@@ -303,8 +308,8 @@ dtype: object</code></pre>
 0          6.0    148.0           72.0  ...      1.0     Middle       Yes
 1          1.0     85.0            NaN  ...      0.0     Middle        No
 2          8.0    183.0           64.0  ...      1.0     Middle       Yes
-3          1.0     89.0           66.0  ...      NaN      Young        No
-4          0.0    137.0           40.0  ...      1.0     Middle       NaN
+3          1.0      NaN           66.0  ...      0.0      Young       NaN
+4          0.0    137.0            NaN  ...      1.0        NaN       Yes
 
 [5 rows x 11 columns]</code></pre>
 </div>
@@ -460,7 +465,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
