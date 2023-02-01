@@ -38,7 +38,7 @@ py_install("statsmodels")
 
 ## Required Setup
 
-We first need to prepare our environment with the necessary libraries and set a global theme for publishable plots in seaborn.
+We first need to prepare our environment with the necessary libraries and set a global theme for publishable plots in `seaborn`.
 
 ```{python req-setup, echo = TRUE}
 # Import all required libraries
