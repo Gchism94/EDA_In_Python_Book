@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.2.335">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -204,7 +204,7 @@ div.csl-indent {
 <p></p><figcaption class="figure-caption"><span class="citation" data-cites="team2022">(<a href="#ref-team2022" role="doc-biblioref">Team 2022</a>)</span></figcaption><p></p>
 </figure>
 </div>
-<p><a href="https://en.wikipedia.org/wiki/Exploratory_data_analysis">Exploratory data analysis</a> is an essential first step towards determining the validity of your data and should be performed throughout the data pipeline. However, EDA is often performed too late or not at all. The [Python programming language](https://en.wikipedia.org/wiki/Python_(programming_language), is a widely used open source platform for <a href="https://en.wikipedia.org/wiki/Data_analysis">data analysis</a> and <a href="https://en.wikipedia.org/wiki/Data_and_information_visualization">data visualization</a>. This is because of the variety of libraries available and attentive community devoted to data analysis.</p>
+<p><a href="https://en.wikipedia.org/wiki/Exploratory_data_analysis">Exploratory data analysis</a> is an essential first step towards determining the validity of your data and should be performed throughout the data pipeline. However, EDA is often performed too late or not at all. The <a href="https://en.wikipedia.org/wiki/Python_(programming_language)">Python programming language</a>, is a widely used open source platform for <a href="https://en.wikipedia.org/wiki/Data_analysis">data analysis</a> and <a href="https://en.wikipedia.org/wiki/Data_and_information_visualization">data visualization</a>. This is because of the variety of libraries available and attentive community devoted to data analysis.</p>
 <p>Here, we utilize the <a href="https://pandas.pydata.org/">pandas</a> and <a href="https://github.com/ydataai/pandas-profiling">pandas-profiling</a> libraries to conduct preliminary exploratory data analysis aimed at diagnosing any major issues with an imported data set. pandas and pandas-profiling offers a clean and straightforward methodology to uncover issues such as data <a href="https://en.wikipedia.org/wiki/Outlier">outliers</a>, <a href="https://en.wikipedia.org/wiki/Missing_data">missing data</a>, as well as summary statistical reports.</p>
 <section id="what-is-exploratory-data-analysis" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-exploratory-data-analysis">What is Exploratory Data Analysis?</h2>
@@ -306,11 +306,11 @@ dtype: object</code></pre>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>   Pregnancies  Glucose  BloodPressure  ...  Outcome  Age_group  Outcome1
-0          6.0    148.0           72.0  ...      1.0     Middle       Yes
+0          6.0    148.0           72.0  ...      1.0        NaN       Yes
 1          1.0     85.0           66.0  ...      0.0     Middle        No
-2          8.0    183.0            NaN  ...      NaN     Middle       Yes
+2          8.0    183.0           64.0  ...      1.0     Middle       Yes
 3          1.0     89.0           66.0  ...      0.0      Young        No
-4          0.0    137.0           40.0  ...      1.0     Middle       NaN
+4          0.0    137.0           40.0  ...      1.0     Middle       Yes
 
 [5 rows x 11 columns]</code></pre>
 </div>
@@ -379,9 +379,6 @@ dtype: object</code></pre>
 <li>Numerical values, but you can compare numericals across categories (see the first plot above).</li>
 </ul>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>&lt;string&gt;:1: FutureWarning: The default value of numeric_only in DataFrame.corr is deprecated. In a future version, it will default to False. Select only valid columns or specify the value of numeric_only to silence this warning.</code></pre>
-</div>
 <div class="cell-output-display">
 <p><img src="intro_files/figure-html/correlation-18.png" class="img-fluid" width="864"></p>
 </div>
